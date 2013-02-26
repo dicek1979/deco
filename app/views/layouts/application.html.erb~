@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<script type="text/javascript">
+script_url = "<%= url_options[:script_name] %>";
+</script>
+
+<html>
+<head>
+  <title>DECO Drive</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+</head>
+
+<% if controller.controller_name == 'top' %>
+  <body class="top">
+<% elsif controller.controller_name == 'file_send'%>
+  <body class="sen">
+<% elsif controller.controller_name == 'file_request'%>
+  <body class="req">
+<% elsif controller.action_name == 'about'%>
+  <body class="srv">
+<% elsif controller.action_name == 'usage'%>
+  <body class="use">
+<% elsif controller.action_name == 'constitution'%>
+  <body class="rul">
+<% elsif controller.action_name == 'ask'%>
+  <body class="con">
+<% else %>
+  <body>
+<% end %>
+
+<div id="header">
+<%= image_tag('common/deco_logo01.jpg', :alt => "DECO Drive", :border => 0) %>
+</div>
+<br />
+
+<script type="text/javascript">
+<% if session[:site_category] == "requested_file_send" and session[:request_send_url_code] -%>
+  <% param_id = session[:request_send_url_code] -%>
+<% elsif session[:site_category] == "requested_file_receive" and session[:request_receive_url_code] -%>
+  <% param_id = session[:request_receive_url_code] -%>
+<% else -%><% param_id = "" -%>
+<% end -%>
+<% amt = 0 -%>
+<% @content_frames = ContentFrame.where(:master_frame => 0).order('content_frame_order') -%>
+headerMenu = new Array(
+<% @content_frames.each.with_index do |content_frame, count| -%>
+<% amt = amt + 1 -%>
+  "<%= content_frame.title %>"<% unless amt == @content_frames.length -%>,
+<% end -%>
+<% end -%>
+        );
+amtHeaderMenu = <%= amt %>;
+print_header('<%= session[:site_category] %>', '<%= param_id %>');
+</script>
+
+<div id="status">
+接続元IPアドレス:<%= @access_ip %>
+<%- unless session[:site_category] -%>
+<% if session[:user_id] -%>
+    ( ユーザID: <%= current_user.login %> )
+    <%= link_to '[設定]', :controller => :user_management, :action => :index -%>
+    <%= link_to '[ログアウト]', :controller => :sessions, :action => :destroy -%>
+  <%- end -%>
+<%- end -%>
+</div>
+
+
+<div id="main">
+
+<% if flash[:notice] -%>
+  <div id="hint">
+<%=h flash[:notice] %>
+  </div>
+<% end -%>
+
+<% if session[:site_category] == 'system' -%>
+  <div id="sys-main">
+    <div id="sys-menu">
+    </div>
+    <div id="sys-cont">
+    <%= yield %>
+    </div>
+  </div>
+<% else -%>
+  <%= yield %>
+<% end -%>
+
+</div>
+
+<div id="footer">
+<font color="#778899">Powered by</font> <a href="http://deco-project.org", target="_blank"><%= image_tag('common/deco_s2.jpg', :alt => "powerd by DECO", :align => "bottom", :style => "vertical-align: middle;", :border => 0) %></a>
+</div>
+
+</body>
+</html>

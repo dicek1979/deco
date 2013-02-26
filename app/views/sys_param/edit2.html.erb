@@ -1,0 +1,41 @@
+<script type="text/javascript">
+
+localDomains = ""
+
+$(document).ready(function() {
+  $.validationEngineLanguage.newLang(localDomains);
+  $("#app_env").validationEngine({
+    success : function() { document.app_env.submit(); },
+    failure : function() {}
+  })
+});
+</script>
+
+<%= $param_label[@app_env.key] %><% if $param_unit[@app_env.key].present? %>(単位：<%= $param_unit[@app_env.key] %>)<% end %>の設定変更
+<fieldset>
+<div class="table-sys-a">
+
+  <%= form_tag({:action => :update_term}, :id => 'app_env', :name=> "app_env") do -%>
+<%#= form_tag({ :action => 'update_term' }, { :id => 'app_env', :name=> "app_env"} ) do %>
+  <div class="item-mid"></div>
+  <div class="input-mid"><%= hidden_field_tag 'id', @app_env.id %>
+                         <%= text_field_tag 'term', @term, :size => 5,
+                               :class => 'validate[required, custom[onlyNumber]]' %>
+                         <%= select_tag 'unit', options_for_select([["日", 1], ["時間", 0]], @unit) %>
+  </div>
+  <div class="item-mid"></div>
+  <div class="input-mid"><%= submit_tag " 更新 " -%></div>
+
+<% end %>
+
+</div>
+</fieldset>
+
+<br>
+
+<% if session[:target_for_back_id] -%>
+<%= link_to "戻る", {:action => session[:target_for_back], :id => session[:target_for_back_id]} %><br />
+<% else -%>
+<%= link_to "戻る", {:action => session[:target_for_back]} %><br />
+<% end -%>
+

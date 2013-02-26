@@ -1,0 +1,158 @@
+1. MySQLのインストール
+
+# yum -y install mysql mysql-server
+
+(/etc/my.cnf)の「[mysqld]」内に以下を追加する
+-----------------------------------------------------------------------------------------------------
+symbolic-links=0
+character-set-server=utf8
+-----------------------------------------------------------------------------------------------------
+
+# yum -y install mysql mysql-devel
+
+# /etc/init.d/mysqld start
+
+# mysql
+
+> GRANT ALL PRIVILEGES ON deco_production.* TO deco@'127.0.0.0/255.255.255.0' IDENTIFIED BY '********';
+> GRANT ALL PRIVILEGES ON deco_production.* TO deco@'localhost' IDENTIFIED BY '********';
+> create database deco_production;
+
+2. ライブラリのインストール
+
+# yum -y install zlib-devel
+# yum -y install openssl-devel
+# yum -y install curl-devel
+
+3. yamlのインストール
+
+# cd /usr/local/src
+# wget http://pyyaml.org/download/libyaml/yaml-0.1.4.tar.gz
+# tar zxvf yaml-0.1.4.tar.gz
+# ./configure
+# make
+# make install
+
+4. Rubyのインストール
+
+# cd /usr/local/src
+# wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p125.tar.gz
+# tar zxvf ruby-1.9.3-p125.tar.gz
+# cd ruby-1.9.3-p125
+# ./configure
+# make
+# make install
+
+5. RubyGemのインストール
+
+# cd /usr/local/src
+# wget http://rubyforge.org/frs/download.php/75475/rubygems-1.8.11.tgz
+# tar zxvf rubygems-1.8.11.tgz
+# cd rubygems-1.8.11
+# ruby setup.rb
+
+6. clamAVのインストール
+
+レポジトリを追加する
+
+# wget http://packages.sw.be/rpmforge-release/rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm
+# rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt
+# rpm -K rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm
+# rpm -i rpmforge-release-0.5.2-2.el6.rf.x86_64.rpm
+
+ClamAVをパッケージでインストールする
+
+# yum -y install clamav clamd clamav-devel clamav-db
+
+(/etc/clamd.conf)の以下の記述を変更する
+
+-----------------------------------------------------------------------------------------------------
+-User clamav
++User root
+-----------------------------------------------------------------------------------------------------
+
+clamAVを起動させる
+# /etc/init.d/clamd start
+
+OS起動時に起動するように設定する
+# chkconfig clamd on
+
+ウィルス定義ファイルを更新する
+# freshclam
+
+
+7. ApacheとPassengerのインストール
+
+# yum -y install httpd httpd-devel
+
+# gem install passenger
+# passenger-install-apache2-module
+
+(/etc/httpd/conf.d/rails.conf)を作成し以下を追加する
+
+-----------------------------------------------------------------------------------------------------
+   LoadModule passenger_module /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.18/ext/apache2/mod_passenger.so
+   PassengerRoot /usr/local/lib/ruby/gems/1.9.1/gems/passenger-3.0.18
+   PassengerRuby /usr/local/bin/ruby
+-----------------------------------------------------------------------------------------------------
+
+(/etc/httpd/conf/httpd.conf)に以下を追加する
+
+-----------------------------------------------------------------------------------------------------
+<VirtualHost *:80>
+  ServerName deco
+  DocumentRoot /usr/local/deco/public
+  RailsEnv production
+  <Directory /usr/local/deco/public>
+    AllowOverride all
+    Options -MultiViews
+  </Directory>
+</VirtualHost>
+-----------------------------------------------------------------------------------------------------
+
+8. DECOのインストール
+
+(/usr/local)にDECOの圧縮ファイルを置いておく
+# cd /usr/local
+# tar xzvf deco.tar.gz
+# cd deco
+# gem install bundler
+# bundle install
+(config/database.yml)の「production」の設定を編集する
+
+-----------------------------------------------------------------------------------------------------
+production:
+  adapter: mysql
+  encoding: utf8
+  database: deco_production
+  pool: 5
+  host: localhost
+  username: deco
+  password: ********
+  socket: /var/lib/mysql/mysql.sock
+-----------------------------------------------------------------------------------------------------
+
+# rake db:migrate RAILS_ENV=production
+# rake db:seed RAILS_ENV=production
+
+(config/environments/production.rb)にメールサーバ情報の記述を追加する
+-----------------------------------------------------------------------------------------------------
+  ActionMailer::Base.smtp_settings[:address] = "localhost"
+  ActionMailer::Base.smtp_settings[:domain] = "example.com"
+-----------------------------------------------------------------------------------------------------
+
+# rake assets:precompile RAILS_ENV=production
+# chown -R apache:apache /usr/local/deco
+
+ファイル保存ディレクトリの作成
+# mkdir -p /var/deco/files
+# chown -R apache:apache /var/deco/files
+
+Webサーバの起動
+# /etc/rc.d/init.d/httpd start
+
+以下のURLで管理画面で設定を行う
+(DECOサーバのURL)/sys_top
+
+設定が完了したら以下のURLでシステムにアクセス
+(DECOサーバのURL)/

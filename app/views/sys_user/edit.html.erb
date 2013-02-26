@@ -1,0 +1,38 @@
+<script type="text/javascript">
+
+localDomains = ""
+
+$(document).ready(function() {
+  $.validationEngineLanguage.newLang(localDomains);
+  $("#user").validationEngine();
+});
+</script>
+
+  <fieldset>
+  <h2>ユーザ情報編集</h2>
+  <%= form_for(:user, :url => { :action => "update", :id => @user.id}, 
+              :html => {:id => 'user', :name=> "user" }) do |f| -%>
+    <div class="table-sys-a">
+      <div class="item-mid2">ユーザＩＤ</div>
+      <div class="input-mid2"><%= f.text_field :login, :class => 'validate[required]', :style => "width:150px;" %></div>
+      <div class="item-mid2">ユーザ名</div>
+      <div class="input-mid2"><%= f.text_field :name, :class => 'validate[required]', :style => "width:150px;" %></div>
+      <div class="item-mid2">メールアドレス</div>
+      <div class="input-mid2"><%= f.text_field :email, :class => 'validate[required, custom[email]]', :style => "width:150px;" %></div>
+      <div class="item-mid2">備考</div>
+      <div class="input-mid2"><%= f.text_area :note, :cols => '40', :rows => '10' %></div>
+      <div class="item-mid2"></div>
+      <div class="input-mid2" align="center"><%= f.submit "更　新" %></div>
+    </div>
+  <% end %>
+  </fieldset>
+
+<br>
+<div align=center>
+<% if session[:target_for_back_id] -%>
+<%= link_to "戻る", {:action => session[:target_for_back], :id => session[:target_for_back_id]} %><br />
+<% else -%>
+<%= link_to "戻る", {:action => session[:target_for_back]} %><br />
+<% end -%>
+</div>
+<br><br>

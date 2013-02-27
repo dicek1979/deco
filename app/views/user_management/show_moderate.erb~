@@ -1,5 +1,0 @@
-<h1>決裁ルートルート</h1>
-
-<%= @moderate.name %>
-
-<%= @moderate.moderaters %>

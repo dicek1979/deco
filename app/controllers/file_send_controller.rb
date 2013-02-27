@@ -490,10 +490,12 @@ class FileSendController < ApplicationController
       @send_matter = SendMatter.find(session[:send_matter_id])
     end
 
-    if (Time.now - (Time.parse(@send_matter.created_at.to_s) +
-                    @send_matter.file_life_period)) > 0
-      flash[:notice] = "ファイルの保管期限を過ぎましたので削除されました。"
-      redirect_to :action => "result_ng"
+    if @send_matter.sent_at.present?
+      if (Time.now - (Time.parse(@send_matter.sent_at.to_s) +
+                      @send_matter.file_life_period)) > 0
+        flash[:notice] = "ファイルの保管期限を過ぎましたので削除されました。"
+        redirect_to :action => "result_ng"
+      end
     end
     @port = get_port()
     @port = @port + "://"

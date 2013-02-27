@@ -102,6 +102,49 @@ function add_receiver(model_name, id_name, text) {
     y2 = model_name + "[" + arInput + "][mail_address]";
 
     $("#" + id_name).append('<div id=\"group_L' + arInput +
+                            '\"  class=\"item\">' + text + ' ' + arInput + '人目</div>' +
+      '<div id=\"group_C' + arInput +'\" class=\"input-l\"><img src=\"' + script_url + '/assets/common/name.jpg\" align=\"left\" /><input type=\"text\" id=\"' +
+      x1 + '\" name=\"' + x2 + '\" value=\"\" class=\'validate[required]\' size=\"30\"/>  様<br />' +
+      '<img src=\"' + script_url + '/assets/common/mail.jpg\" align=\"left\" /><input type=\"text\" id=\"' +
+      y1 + '\" name=\"' + y2 + '\" value=\"\" ' +
+      'class=\'validate[required, custom[email]]\' size=\"40\"/></div>' +
+      '<div id=\"group_R' + arInput + '\" class=\"input-r\"><input type="button" onclick="del_receiver(\'' +
+      arInput + '\', \'' + model_name + '\')" value="削除" /></div>' +
+      '\n');
+
+
+    arInput = 0;
+
+//    for (i in files) {
+//      if (files[i] == 1) {
+//             $.validationEngine.closePrompt($('#' + 'attachment' + '_' + i + '_file'));
+//
+//      }
+//    }
+  }else{
+    window.alert(max_receivers_num+"名までです");
+  }
+}
+
+
+//受信者フォーム追加処理
+function add_receiver_address_book(model_name, id_name, text) {
+
+  for (i in receivers) {
+    if (receivers[i] == 0) {
+      arInput = i;
+      break;
+    }
+  }
+  if (arInput) {
+    receivers[arInput] = 1;
+
+    x1 = model_name + "_" + arInput + "_name";
+    x2 = model_name + "[" + arInput + "][name]";
+    y1 = model_name + "_" + arInput + "_mail_address";
+    y2 = model_name + "[" + arInput + "][mail_address]";
+
+    $("#" + id_name).append('<div id=\"group_L' + arInput +
                             '\"  class=\"item\">' + text + ' ' + arInput + '人目<div class=\"re_address_p\"><div class=\"re_address\" onClick=\"open_modal_window(\'/address_books/index_sub?recipient_number=' + arInput + '\',\'modal\');\" title=\"アドレス帳\"></div></div></div>' +
       '<div id=\"group_C' + arInput +'\" class=\"input-l\"><img src=\"' + script_url + '/assets/common/name.jpg\" align=\"left\" /><input type=\"text\" id=\"' +
       x1 + '\" name=\"' + x2 + '\" value=\"\" class=\'validate[required]\' size=\"30\"/>  様<br />' +

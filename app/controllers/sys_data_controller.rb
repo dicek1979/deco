@@ -92,7 +92,12 @@ class SysDataController < ApplicationController
     end
 
     if File.exist?($app_env['FILE_DIR'] + "/#{@attachment.id}")
+=begin
       send_file $app_env['FILE_DIR'] + "/#{@attachment.id}",
+               :filename => @filename,
+               :type => @attachment.content_type
+=end
+      send_data $app_env['FILE_DIR'] + "/#{@attachment.id}",
                :filename => @filename,
                :type => @attachment.content_type
     else
@@ -114,7 +119,12 @@ class SysDataController < ApplicationController
     end
 
     if File.exist?($app_env['FILE_DIR'] + "/r#{@requested_attachment.id}")
+=begin
       send_file $app_env['FILE_DIR'] + "/r#{@requested_attachment.id}",
+               :filename => @filename,
+               :type => @requested_attachment.content_type
+=end
+      send_data $app_env['FILE_DIR'] + "/r#{@requested_attachment.id}",
                :filename => @filename,
                :type => @requested_attachment.content_type
     else

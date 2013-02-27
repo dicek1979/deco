@@ -132,7 +132,12 @@ class RequestedFileReceiveController < ApplicationController
           else
             @filename = @requested_attachment.name
           end
+=begin
           send_file $app_env['FILE_DIR'] + "/r#{@requested_attachment.id}",
+                    :filename => @filename,
+                    :type => @requested_attachment.content_type
+=end
+          send_data $app_env['FILE_DIR'] + "/r#{@requested_attachment.id}",
                     :filename => @filename,
                     :type => @requested_attachment.content_type
         end

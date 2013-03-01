@@ -53,7 +53,7 @@ class FileRequestController < ApplicationController
         @requested_matter.request_matter = @request_matter
         @requested_matter.url = generate_random_strings(@requested_matter.name)
         @requested_matter.send_password =
-            generate_random_strings(@requested_matter.mail_address).slice(1,8)
+            generate_random_string_values(@requested_matter.mail_address).slice(1,8)
         @requested_matter.save!
 
         recipients[@requested_matter.id] = [ @requested_matter.mail_address,

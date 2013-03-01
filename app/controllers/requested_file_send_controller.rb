@@ -115,7 +115,7 @@ class RequestedFileSendController < ApplicationController
         password_length = $app_env['PW_LENGTH_MIN'].to_i +
           ($app_env['PW_LENGTH_MAX'].to_i - $app_env['PW_LENGTH_MIN'].to_i) / 2
         @randam_password =
-            generate_random_strings(rand(10000).to_s).slice(1,password_length)
+            generate_random_string_values(rand(10000).to_s).slice(1,password_length)
         respond_to do |format|
           format.html
           format.xml { reander :xml => @requested_file_send }
@@ -152,7 +152,7 @@ class RequestedFileSendController < ApplicationController
         password_length = $app_env['PW_LENGTH_MIN'].to_i +
           ($app_env['PW_LENGTH_MAX'].to_i - $app_env['PW_LENGTH_MIN'].to_i) / 2
         @randam_password =
-            generate_random_strings(rand(10000).to_s).slice(1,password_length)
+            generate_random_string_values(rand(10000).to_s).slice(1,password_length)
         respond_to do |format|
           format.html
           format.xml { reander :xml => @requested_file_send }

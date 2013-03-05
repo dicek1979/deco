@@ -20,11 +20,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-#  database: deco_development
-  database: deco_production
+  database: deco_development
   pool: 5
   username: deco
-  password: neoral5552
+  password: 
   socket: <%= socket %>
 
 # Warning: The database defined as "test" will be erased and

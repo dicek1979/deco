@@ -137,15 +137,16 @@ class FileReceiveController < ApplicationController
           else
             @filename = @attachment.name
           end
+          send_file($app_env['FILE_DIR'] + "/#{@attachment.id}",
+                    :filename => @filename,
+                    :type => @attachment.content_type,
+                    :x_sendfile => true)
 =begin
           send_file($app_env['FILE_DIR'] + "/#{@attachment.id}",
                     :filename => @filename,
                     :type => @attachment.content_type,
                     :x_sendfile => true)
 =end
-          send_data($app_env['FILE_DIR'] + "/#{@attachment.id}",
-                    :filename => @filename,
-                    :type => @attachment.content_type)
         else
           flash[:notice] = "ファイルの保管期限を過ぎましたので削除されました。"
           redirect_to :action => 'illegal' and return

@@ -92,14 +92,15 @@ class SysDataController < ApplicationController
     end
 
     if File.exist?($app_env['FILE_DIR'] + "/#{@attachment.id}")
+      send_file $app_env['FILE_DIR'] + "/#{@attachment.id}",
+               :filename => @filename,
+               :type => @attachment.content_type,
+               :x_sendfile => true
 =begin
       send_file $app_env['FILE_DIR'] + "/#{@attachment.id}",
                :filename => @filename,
                :type => @attachment.content_type
 =end
-      send_data $app_env['FILE_DIR'] + "/#{@attachment.id}",
-               :filename => @filename,
-               :type => @attachment.content_type
     else
       flash[:error] = $app_env['FILE_DIR'] +
              "/#{@attachment.id}　が存在しません"
@@ -119,14 +120,15 @@ class SysDataController < ApplicationController
     end
 
     if File.exist?($app_env['FILE_DIR'] + "/r#{@requested_attachment.id}")
+      send_file $app_env['FILE_DIR'] + "/r#{@requested_attachment.id}",
+               :filename => @filename,
+               :type => @requested_attachment.content_type,
+               :x_sendfile => true
 =begin
       send_file $app_env['FILE_DIR'] + "/r#{@requested_attachment.id}",
                :filename => @filename,
                :type => @requested_attachment.content_type
 =end
-      send_data $app_env['FILE_DIR'] + "/r#{@requested_attachment.id}",
-               :filename => @filename,
-               :type => @requested_attachment.content_type
     else
       flash[:error] = $app_env['FILE_DIR'] +
               "/r#{@requested_attachment.id}　が存在しません"

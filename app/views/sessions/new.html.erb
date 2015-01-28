@@ -1,22 +1,33 @@
-<div id="center30">
-  <h1><%= image_tag("common/deco_logo01.jpg", :alt => "DECO Drive") %></h1>
-  <% if flash[:notice] -%>
-    <div>
-  <%= flash[:notice] %>
-    </div>
-  <% end -%>
-  <%= form_tag  :action => :create do -%>
-  <div id="login_d">
-      <%= image_tag("common/userid.gif", :alt => "ユーザID") %>
-      <%= text_field_tag 'login' %><br />
-      <%= image_tag("common/pass.gif", :alt => "パスワード") %>
-      <%= password_field_tag 'password' %><br /><br /><br />
-      <%= image_submit_tag("common/login.gif")%>
-    </div>
-    <br /><br />
-    <%! image_tag("common/deco_s.jpg", :alt => "powerd by DECO") %>
+<div class="container">
+  <div class="row">
+        <div class="login-icon">
+          <%= image_tag("images/Onest-logo_Blue01.png", :alt => "Onest") %>
+        </div>
 
-    <font color="#778899">Powered by</font> <a href="http://deco-project.org"><%= image_tag('common/deco_s2.jpg', :alt => "powerd by DECO", :style => "vertical-align: middle;", :border => 0) %></a>
+        <div class="flat-form">
+            <div class="form-action show">
+              <% if flash[:notice] -%>
+              <div class="alart">
+              <%= flash[:notice] %>
+              </div>
+              <% end -%>
+              <%= form_tag  :action => :create do -%>
 
-  <% end -%>
+              <div class="form-control">
+                <%= text_field_tag 'login', @login, :placeholder=>"ユーザー名", autofocus: true %>
+              </div>
+
+              <div class="form-control">
+                <%= password_field_tag 'password', @password, :placeholder=>"パスワード入力", autocomplete: "off" %>
+              </div>
+
+              <div class="form-control">
+                <input class="button" type="submit" value="ログイン"></input>
+              </div>
+              
+              <% end -%>
+            </div>
+            <!--/#login.form-action-->
+        </div>
+  </div>
 </div>

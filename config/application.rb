@@ -70,6 +70,7 @@ module Deco
 
 
     config.autoload_paths += %W(#{config.root}/lib)
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.time_zone = 'Tokyo'
   end
 end

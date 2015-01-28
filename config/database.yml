@@ -23,7 +23,7 @@ development:
   database: deco_development
   pool: 5
   username: deco
-  password: 
+  password: deco
   socket: <%= socket %>
 
 # Warning: The database defined as "test" will be erased and

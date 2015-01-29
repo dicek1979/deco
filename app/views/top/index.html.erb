@@ -1,53 +1,58 @@
-<div class="container">
-<div id="info">
-    <% cnt = 0 -%>
-<%- for announcement in @announcements -%>
-  <%- cnt = cnt + 1 -%>
-<script type="text/javascript">
-announcement_body_flg_<%= cnt %> = 0;
+<div class="container">  
+  <div class="row">
+  <div id="info" class="alert alert-info">
+      <% cnt = 0 -%>
+      <%- for announcement in @announcements -%>
+      <%- cnt = cnt + 1 -%>
+      <script type="text/javascript">
+        announcement_body_flg_<%= cnt %> = 0;
 
-function display_<%= cnt %> () {
-  if (announcement_body_flg_<%= cnt %> == 0) {
-    $("#announcement_body_<%= cnt %>").css("display","block");
-    
+        function display_<%= cnt %> () {
+          if (announcement_body_flg_<%= cnt %> == 0) {
+            $("#announcement_body_<%= cnt %>").css("display","block");
+            
+            announcement_body_flg_<%= cnt %> = 1;
+          } else {
+            announcement_body_flg_<%= cnt %> = 0;
+            $("#announcement_body_<%= cnt %>").css("display","none");
+          }
+        }
+      </script>
 
-    announcement_body_flg_<%= cnt %> = 1;
-  } else {
-    announcement_body_flg_<%= cnt %> = 0;
-    $("#announcement_body_<%= cnt %>").css("display","none");
-  }
-}
-</script>
+    <div id="announcement_title" onclick="display_<%= cnt %>()">
+      <%= announcement.updated_at.strftime('%Y/%m/%d %H:%M') %>　<%= announcement.title %>
+    </div>
+    <br>
+    <div id='announcement_body_<%= cnt %>' style="display:none;">
+      <%= announcement.body %><br><br></div>
+      <%- end -%>
+      <%- if cnt == 0 -%>
+        現在、お知らせはありません。<br>
+      <%- end -%>
+    </div>
+  </div>
 
-<div id="announcement_title" onclick="display_<%= cnt %>()"><%= announcement.updated_at.strftime('%Y/%m/%d %H:%M') %>　<%= announcement.title %></div><br>
-<div id='announcement_body_<%= cnt %>' style="display:none;"><%= announcement.body %><br><br></div>
-<%- end -%>
-<%- if cnt == 0 -%>
-  現在、お知らせはありません。<br>
-<%- end -%>
-</div>
-        <div class="row demo-tiles" style="width: auto;float: left; position: relative;">
-        <div class="col-lg-6" style="float: left; position: relative;" >
-          <div class="tile">
-            <%= image_tag("images/mail.svg", :alt => "mail") %>
-            <h3 class="tile-title">ファイルを送信する</h3>
-            <p>ファイルを送る時に使用します。</p>
-            <%= link_to("ファイルを送る", {:controller => "file_send", :action => "index"},  {:id => 'm1', class: "btn btn-primary btn-large btn-block"}) %>
-          </div>
-        </div>
 
-        <div class="col-lg-6" style="float: left; position: relative;">
-          <div class="tile">
-            <%= image_tag("images/gift-box.svg", :alt => "mail") %>
-            <h3 class="tile-title">ファイル送信を依頼する</h3>
-            <p>ファイル送付を依頼するときに使用します。</p>
-            <%= link_to("ファイルを依頼する", {:controller => "file_request", :action => "index"}, {:id => 'm2',class: "btn btn-primary btn-large btn-block"}) %>
-          </div>
-        </div>
-      </div> <!-- /tiles -->
+  <div class="row">
+    <div class="span6">
+      <div class="tile">
+        <%= image_tag("images/mail.svg", :alt => "mail", class:"tile-image tile-image.big-illustration" ) %>
+        <h3 class="tile-title">ファイルを送信する</h3>
+        <p>ファイルを送る時に使用します。</p>
+        <%= link_to("ファイルを送る", {:controller => "file_send", :action => "index"},  {:id => 'm1', class: "btn btn-primary btn-lg btn-block"}) %>
+      </div>
+    </div>
 
-</div>
-
+    <div class="span6">
+      <div class="tile">
+        <%= image_tag("images/gift-box.svg", :alt => "mail", class:"tile-image tile-image.big-illustration" ) %>
+        <h3 class="tile-title">ファイル送信を依頼する</h3>
+        <p>ファイル送付を依頼するときに使用します。</p>
+        <%= link_to("ファイルを依頼する", {:controller => "file_request", :action => "index"}, {:id => 'm2',class: "btn btn-primary btn-lg btn-block"}) %>
+      </div>
+    </div>
+  </div> <!-- row /tiles -->
+</div> <!-- container -->
 
 <!--   <div id="menu">
     <h1>システムメニュー</h1>
@@ -59,13 +64,13 @@ function display_<%= cnt %> () {
     </dl>
   </div> -->
 
-  <div id="service">
+<!--   <div id="service">
     <h1>サービスについて</h1>
     <dl>
-<% @content_frames.each.with_index do |content_frame, count| -%>
-      <dt><%= link_to(content_frame.title, :controller => "content", :action => "load", :id => content_frame.id) %></dt>
-      <dd><%= content_frame.description %></dd>
-<% end -%>
+<%# @content_frames.each.with_index do |content_frame, count| -%>
+      <dt><%#= link_to(content_frame.title, :controller => "content", :action => "load", :id => content_frame.id) %></dt>
+      <dd><%#= content_frame.description %></dd>
+<%# end -%>
     </dl>
-  </div>
+  </div> -->
 

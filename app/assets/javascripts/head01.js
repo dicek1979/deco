@@ -1,6 +1,6 @@
 function print_header(site_category, param_id) {
 
-  document.write("<div id=\"global-nav\"><ul>");
+  document.write("<div id=\"global-nav\"><ul class=\"nav nav-list\">");
 
   switch (site_category) {
   case "file_receive":

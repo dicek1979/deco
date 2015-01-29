@@ -2,7 +2,8 @@
 
 body {
     font-family: 'Lato', Calibri, Arial, sans-serif;
-    background: #ddd url(images/bg.jpg) repeat top left;
+    /*background: #ddd url(images/bg.jpg) repeat top left;*/
+    background: #fff;
     font-weight: 300;
     font-size: 15px;
     color: #333;
@@ -11,7 +12,108 @@ body {
     overflow-x: hidden;
 }
 
-.container {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1.1;
+  color: inherit;
+  }
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small,
+.h1 small,
+.h2 small,
+.h3 small,
+.h4 small,
+.h5 small,
+.h6 small {
+  color: #e7e9ec;
+  }
+h1,
+h2,
+h3 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  }
+h4,
+h5,
+h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  }
+h6 {
+  font-weight: normal;
+  }
+h1,
+.h1 {
+  font-size: 61px;
+  }
+h2,
+.h2 {
+  font-size: 53px;
+  }
+h3,
+.h3 {
+  font-size: 40px;
+  }
+h4,
+.h4 {
+  font-size: 29px;
+  }
+h5,
+.h5 {
+  font-size: 28px;
+  }
+h6,
+.h6 {
+  font-size: 24px;
+  }
+p {
+  margin: 0 0 15px;
+  font-size: 18px;
+  line-height: 1.72222;
+  }
+
+// .container {
+//   width: 750px !important;
+//   }
+
+.demo-headline {
+  padding: 30px 0 20px;
+  text-align: center;
+  }
+
+.demo-logo {
+  margin: 10px 0;
+  font: 900 90px/100px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: -2px;
+  }
+
+.demo-logo .logo {
+  width: auto;
+  height: 200px;
+  margin: 0 auto;
+  overflow: hidden;
+  text-indent: -9999em;
+  background: url(images/Onest-logo_Blue01.png) center 0 no-repeat;
+  background-size: 250px 240px;
+  }
+
+.container-signin {
   width: 690px;
   margin: 0 auto;
   padding-right: 15px;
@@ -53,12 +155,7 @@ body {
   display: block;
 }
 
-.alart {
-  font-size: 20px;
-  padding-bottom: 10px;
-  line-height: 25px;
-  color: #FFF;
-}
+
 
 .form-control {
   position: relative;
@@ -126,43 +223,44 @@ body {
   color: #e74c3c;
 }
 
-.navbar .container,
-.navbar .container-fluid {
-  padding-right: 21px;
-  padding-left: 21px;
-  }
-.navbar .container > .navbar-header,
-.navbar .container-fluid > .navbar-header,
-.navbar .container > .navbar-collapse,
-.navbar .container-fluid > .navbar-collapse {
-  margin-right: -21px;
-  margin-left: -21px;
-  }
-@media (min-width: 768px) {
-  .navbar .container > .navbar-header,
-  .navbar .container-fluid > .navbar-header,
-  .navbar .container > .navbar-collapse,
-  .navbar .container-fluid > .navbar-collapse {
-    margin-right: 0;
-    margin-left: 0;
-    }
-  }
+/* Container */
+// .navbar .container,
+// .navbar .container-fluid {
+//   padding-right: 21px;
+//   padding-left: 21px;
+//   }
+// .navbar .container > .navbar-header,
+// .navbar .container-fluid > .navbar-header,
+// .navbar .container > .navbar-collapse,
+// .navbar .container-fluid > .navbar-collapse {
+//   margin-right: -21px;
+//   margin-left: -21px;
+//   }
+// @media (min-width: 768px) {
+//   .navbar .container > .navbar-header,
+//   .navbar .container-fluid > .navbar-header,
+//   .navbar .container > .navbar-collapse,
+//   .navbar .container-fluid > .navbar-collapse {
+//     margin-right: 0;
+//     margin-left: 0;
+//     }
+//   }
 
 .tile {
   position: relative;
-  padding: 14px;
+  padding: 30px;
   margin-bottom: 20px;
   text-align: center;
   background-color: #eff0f2;
   border-radius: 6px;
   }
-.tile .tile-hot-ribbon {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  display: block;
-  width: 82px;
-  }
+// .tile .tile-hot-ribbon {
+//   position: absolute;
+//   top: -4px;
+//   right: -4px;
+//   display: block;
+//   width: 100px;
+//   }
 .tile p {
   margin-bottom: 33px;
   font-size: 15px;

@@ -12,6 +12,45 @@ body {
     overflow-x: hidden;
 }
 
+.heder-logo{
+  float: left;
+  position: relative;
+  padding: 0 0 20px;
+}
+
+.demo-logo {
+  margin: 10px 0;
+  letter-spacing: -2px;
+  }
+
+.demo-logo .logo {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  overflow: hidden;
+  text-indent: -9999em;
+  background: url(images/Onest-logo_Blue01.png) center 0 no-repeat;
+  background-size: 250px 240px;
+  }
+
+/* menu */
+ .sidebar-nav{
+   float:right;
+   margin: 40px 0 20px;
+ }
+
+ .header-menu{
+   position: relative;
+   margin: 50px 0 20px;
+   padding: 20px 0 20px;
+ }
+
+ .header-status{
+   float:right;
+   margin: 0 ;
+   padding: 20px 0 20px;
+ }
+
 h1,
 h2,
 h3,
@@ -88,30 +127,7 @@ p {
   line-height: 1.72222;
   }
 
-// .container {
-//   width: 750px !important;
-//   }
 
-.demo-headline {
-  padding: 30px 0 20px;
-  text-align: center;
-  }
-
-.demo-logo {
-  margin: 10px 0;
-  font: 900 90px/100px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  letter-spacing: -2px;
-  }
-
-.demo-logo .logo {
-  width: auto;
-  height: 200px;
-  margin: 0 auto;
-  overflow: hidden;
-  text-indent: -9999em;
-  background: url(images/Onest-logo_Blue01.png) center 0 no-repeat;
-  background-size: 250px 240px;
-  }
 
 .container-signin {
   width: 690px;
@@ -154,8 +170,6 @@ p {
 .show {
   display: block;
 }
-
-
 
 .form-control {
   position: relative;

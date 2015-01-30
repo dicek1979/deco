@@ -17,6 +17,7 @@ script_url = "<%= url_options[:script_name] %>";
   <%= stylesheet_link_tag "application" %>
   <%= stylesheet_link_tag "/assets/application_2.css?body=#{SecureRandom.hex(10)}" if File.exists?("#{Rails.root}/public/assets/application_2.css") %>
   <%= javascript_include_tag "application" %>
+  <%= render 'layouts/shim' %>
 </head>
 <body>
   <%= yield %>

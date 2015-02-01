@@ -31,26 +31,14 @@
     </div>
   </div>
 
-
-  <div class="row">
-    <div class="span4">
-      <div class="tile">
-        <%= image_tag("images/mail.svg", :alt => "mail", class:"tile-image tile-image.big-illustration" ) %>
-        <h3 class="tile-title">ファイルを送信する</h3>
-        <p>ファイルを送るときに</p>
-        <%= link_to("ファイルを送る", {:controller => "file_send", :action => "index"},  {:id => 'm1', class: "btn btn-primary btn-lg btn-block"}) %>
+  <div class="row main-content">
+    <div class="col-md-12">
+      <h2 class="animated fadeInDown">さぁ、シンプルな共有機能で<br>「簡単に」「安全に」ファイルをシェアしよう。</h2>
+      <h6>「Onest」は大容量のデータをブラウザで安心かつ簡単に送受信できる<br>ウェブアプリケーションです。</h6>
+      <%= link_to("ファイルを送る", {:controller => "file_send", :action => "index"},  {:id => 'm1', class: "use-btn animated fadeInUp"}) %>
+      <%= link_to("ファイルを依頼する", {:controller => "file_request", :action => "index"}, {:id => 'm2',class: "learn-btn animated fadeInUp"}) %><i class="fa fa-arrow-down"></i>
       </div>
-    </div>
-
-    <div class="span4 offset1" style="float: right;">
-      <div class="tile">
-        <%= image_tag("images/gift-box.svg", :alt => "mail", class:"tile-image tile-image.big-illustration" ) %>
-        <h3 class="tile-title">ファイル送信を依頼する</h3>
-        <p>ファイル送付を依頼するときに</p>
-        <%= link_to("ファイルを依頼する", {:controller => "file_request", :action => "index"}, {:id => 'm2',class: "btn btn-primary btn-lg btn-block"}) %>
-      </div>
-    </div>
-  </div> <!-- row /tiles -->
+  </div>
 
 
 <!--   <div id="service">

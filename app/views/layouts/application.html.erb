@@ -12,7 +12,7 @@ script_url = "<%= url_options[:script_name] %>";
   <%= javascript_include_tag "application" %>
   <%= render 'layouts/shim' %>
 
-  <style type="text/css">
+<!-- /*  <style type="text/css">
       body {
         padding-top: 20px;
         padding-bottom: 40px;
@@ -25,7 +25,7 @@ script_url = "<%= url_options[:script_name] %>";
       .container-narrow > hr {
         margin: 30px 0;
       }
-  </style>
+  </style>*/ -->
 </head>
 
 <% if controller.controller_name == 'top' %>
@@ -46,15 +46,32 @@ script_url = "<%= url_options[:script_name] %>";
   <body>
 <% end %>
 
-<div class="container-narrow">
-  <div class="masthead">
-    <div class="heder-logo">
-      <h1 class="demo-logo">
-        <div class="logo"></div>
-      </h1>
-    </div>
-    <!-- global nav Start -->
-    <script type="text/javascript">
+<div class="wrapper">
+  <div class="texture-overlay"></div>
+  <div class="container">
+    <div class="row nav-wrapper">
+      <div class="col-md-2 col-sm-2 col-xs-2 text-left">
+      <a href="#" class="logo-link logo"><%= image_tag("images/Onest-logo_B01.png", :alt => "Onest") %></a>
+      </div>
+
+      <div class="col-md-6 col-sm-6 col-xs-6 text-right navicon">
+        <div class="pull-right">
+          <ul class="nav pull-right">
+            <li class="dropdown"><a href="#" class="nav_slide_button nav-toggle" data-toggle="dropdown"><span></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/user/preferences"><i class="icon-cog"></i> Preferences</a></li>
+              <li><a href="/help/support"><i class="icon-envelope"></i> Contact Support</a></li>
+              <li class="divider"></li>
+              <li><a href="/auth/logout"><i class="icon-off"></i> Logout</a></li>
+            </ul>
+            </li>
+          </ul>
+        </div>
+                               
+
+      <!-- global nav Start -->
+
+      <script type="text/javascript">
       <% if session[:site_category] == "requested_file_send" and session[:request_send_url_code] -%>
         <% param_id = session[:request_send_url_code] -%>
         <% elsif session[:site_category] == "requested_file_receive" and session[:request_receive_url_code] -%>
@@ -72,8 +89,15 @@ script_url = "<%= url_options[:script_name] %>";
               );
       amtHeaderMenu = <%= amt %>;
       print_header('<%= session[:site_category] %>', '<%= param_id%>');
-    </script>
-    <!-- global nav End -->
+      </script>
+      
+<!--       <p>MENU</p><a id="trigger-overlay" class="nav_slide_button nav-toggle" href="#"><span></span></a> -->
+      </div><!-- global nav End -->
+  </div>
+
+
+
+  
 
     <div id="status" class="header-status">
       <%#= t('views.login_state.src_ip_address') %><%#= @access_ip %>
@@ -86,11 +110,8 @@ script_url = "<%= url_options[:script_name] %>";
       <%- end -%>
     </div><!-- header-status -->
     </div><!-- sidebar-nav -->
-  </div><!-- masthead End -->
 
-  <div class="row">
     <div class="row">
-    
       <% if flash[:notice] -%>
         <div id="hint" class="alert alert-success">
       <%=h flash[:notice] %>
@@ -110,7 +131,27 @@ script_url = "<%= url_options[:script_name] %>";
         <%= yield %>
       <% end -%>
       </div>
-</div>
-</div><!-- /container -->
+
+      <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5">
+            <h1 class="footer-logo">
+            <%= image_tag("images/Onest-logo_B02.png", :alt => "Onest") %>
+            </h1>
+            <p>© Onest 2015 - <a href="#">Licence</a> - Designed &amp; Developed by <a href="#">#####</a></p>
+          </div>
+          <div class="col-md-7">
+            <ul class="footer-nav">
+              <li><a href="#about">About</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#screenshots">Screenshots</a></li>
+              <li><a href="#download">Download</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+</div><!-- wrapper -->
 </body>
 </html>

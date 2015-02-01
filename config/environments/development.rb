@@ -34,4 +34,21 @@ Deco::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Specifies the header that your server uses for sending files
+  # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+
+  #Gmail setting
+  ActionMailer::Base.delivery_method = :sendmail
+  ActionMailer::Base.sendmail_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => "587",
+    :domain               => "gmail.com",
+    :user_name            => "username@gmail.com",
+    :password             => "password",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+
 end

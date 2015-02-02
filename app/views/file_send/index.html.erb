@@ -83,7 +83,8 @@ for (i = 2 ; i <= max_receivers_num; i++) {
 //        });
 //    });
 </script>
-<div class="modal"></div>
+
+<!-- <div class="modal"></div> -->
 
 <%= form_for(:send_matter, :url => { :action => "create" },
   :html => {:id => 'send_matter', :name=> "send_matter" }) do |f| -%>
@@ -91,7 +92,7 @@ for (i = 2 ; i <= max_receivers_num; i++) {
 <%= f.hidden_field :relayid, {:value => @relay_id} %>
 
 
-<h1>ファイル送信</h1>
+<h3>ファイル送信</h3>
 <p class="comment">この画面からファイルの送信が可能です。<br />
 以下のフォームに必要事項を記入し，[ファイルを送信する]をクリックしてください。
 （<span class="required">※</span> 印は必須項目です。）</p>
@@ -99,10 +100,9 @@ for (i = 2 ; i <= max_receivers_num; i++) {
 :action => 'index_noflash' -%>
 から簡易バージョンをお試しください。</p>
 
-    <h2>１．送信者情報入力　（あなたの情報を入力してください）</h2>
+    <h4>１．送信者情報入力（あなたの情報を入力してください）</h4>
 
     <fieldset>
-
     <legend>送信者情報入力</legend>
     <div class="table-a">
   <% if session[:user_id].present? && current_user.present? %>
@@ -142,7 +142,7 @@ for (i = 2 ; i <= max_receivers_num; i++) {
 
     </fieldset>
 
-    <h2>２．パスワード，その他の設定</h2>
+    <h4>２．パスワード，その他の設定</h4>
 
     <fieldset>
 
@@ -198,7 +198,7 @@ for (i = 2 ; i <= max_receivers_num; i++) {
 </div>
      </fieldset>
 
-    <h2>３．受取人情報入力　（ファイルを受け取る相手の情報を入力してください）</h2>
+    <h4>３．受取人情報入力（ファイルを受け取る相手の情報を入力してください）</h4>
 
 <%= render 'receivers' %>
 
@@ -227,7 +227,7 @@ file_upload();
 
 </script>
 
-    <h2>４．送信するファイルの選択</h2>
+    <h4>４．送信するファイルの選択</h4>
 
     <span class="left"><%= $app_env['FILE_SEND_LIMIT'] %>ファイル
     （合計<%= $app_env['FILE_TOTAL_SIZE_LIMIT'] %>MB）まで送信できます。
@@ -264,7 +264,10 @@ file_upload();
 </fieldset>
 
 <br /><br />
-    <p id="submitbtn" align="center"><%= image_submit_tag("common/but_send.gif" ) %></p>
+    <div class="form-control">
+      <input id="submitbtn" class="button" type="submit" value="ファイルを送信する"></input>
+    </div>
+    
     <br /><br />
 <% end %>
 

@@ -1,6 +1,6 @@
 function print_header(site_category, param_id) {
 
-  document.write("<div id=\"global-nav\" class=\"well sidebar-nav\" ><ul class=\"nav nav-list\"><li class=\"nav-header\">MENU</li>");
+  document.write("<ul class=\"dropdown-menu pull-right\">");
 
   switch (site_category) {
   case "file_receive":
@@ -21,7 +21,7 @@ function print_header(site_category, param_id) {
   case "system":
     break;
   default:
-    document.write("<li class=\"active\" id=\"p_top\"><a href=\"" + script_url + "/\">トップページ</a></li>" + 
+    document.write("<li class=\"active\" id=\"p_top\"><a href=\"" + script_url + "/\">ホーム</a></li>" + 
                    "<li id=\"p_sen\"><a href=\"" + script_url + "/file_send\">ファイル送信</a></li>" +
                    "<li id=\"p_req\"><a href=\"" + script_url + "/file_request\">ファイル依頼</a></li>");
     break;

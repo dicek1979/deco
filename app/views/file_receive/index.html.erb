@@ -1,3 +1,19 @@
+<div class="wrapper-top">
+  <div class="texture-overlay"></div>
+    <div class="container-signin">
+  <div class="row">
+        <div class="login-icon animated fadeInDown">
+          <%= image_tag("images/Onest-logo_B01.png", :alt => "Onest") %>
+        </div>
+        <div class="flat-form">
+          <div class="form-action show">
+              <% if flash[:notice] -%>
+              <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <%= flash[:notice] %>
+              </div>
+              <% end -%>
+
 <p>ダウンロードボタンをクリックして，ファイルをダウンロードしてください。</p>
 <div class="table-a">
   <div class="item-top">ファイル送信者名</div>
@@ -56,3 +72,9 @@
 </div>
 
 <div style="height:150px; clear:both;"></div>
+            </div>
+            <!--/#login.form-action-->
+        </div>
+</div>
+</div>
+</div><!-- wrapper-top -->

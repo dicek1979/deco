@@ -21,6 +21,9 @@ class TopController < ApplicationController
   before_filter :load_env
   before_filter :vacuum_file_for_file_exchange
   before_filter :vacuum_data_for_file_exchange
+
+  layout 'toppage'
+  
   def index
     session[:site_category] = nil
     @announcements =

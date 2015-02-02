@@ -11,21 +11,6 @@ script_url = "<%= url_options[:script_name] %>";
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <%= render 'layouts/shim' %>
-
-<!-- /*  <style type="text/css">
-      body {
-        padding-top: 20px;
-        padding-bottom: 40px;
-      }
-      /* Custom container */
-      .container-narrow {
-        margin: 0 auto;
-        max-width: 740px;
-      }
-      .container-narrow > hr {
-        margin: 30px 0;
-      }
-  </style>*/ -->
 </head>
 
 <% if controller.controller_name == 'top' %>
@@ -46,99 +31,79 @@ script_url = "<%= url_options[:script_name] %>";
   <body>
 <% end %>
 
-<div class="wrapper">
-  <div class="texture-overlay"></div>
+<div class="wrapper-sub">
+  <!-- <div class="texture-overlay"></div> -->
   <div class="container">
     <div class="row nav-wrapper">
-      <div class="col-md-2 col-sm-2 col-xs-2 text-left">
-      <a href="#" class="logo-link logo"><%= image_tag("images/Onest-logo_B01.png", :alt => "Onest") %></a>
+      <div class="row">
+        <% if flash[:notice] -%>
+          <div id="hint" class="alert alert-success">
+        <%=h flash[:notice] %>
+          </div>
+      <% end -%>
+      </div>
+
+      <div class="col-md-2 col-sm-2 col-xs-2 text-left">  
+        <%= link_to image_tag("images/Onest-logo_B01.png", :alt => "Onest", class: "logo") %>
       </div>
 
       <div class="col-md-6 col-sm-6 col-xs-6 text-right navicon">
         <div class="pull-right">
           <ul class="nav pull-right">
-            <li class="dropdown"><a href="#" class="nav_slide_button nav-toggle" data-toggle="dropdown"><span></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="/user/preferences"><i class="icon-cog"></i> Preferences</a></li>
-              <li><a href="/help/support"><i class="icon-envelope"></i> Contact Support</a></li>
-              <li class="divider"></li>
-              <li><a href="/auth/logout"><i class="icon-off"></i> Logout</a></li>
-            </ul>
-            </li>
+                <li class="dropdown"><h6 style="padding-right:-20px;">MENU</h6><a href="#" class="nav_slide_button nav-toggle" data-toggle="dropdown"><span></span></a>
+                <!-- global nav Start -->
+                <script type="text/javascript">
+                <% if session[:site_category] == "requested_file_send" and session[:request_send_url_code] -%>
+                  <% param_id = session[:request_send_url_code] -%>
+                  <% elsif session[:site_category] == "requested_file_receive" and session[:request_receive_url_code] -%>
+                  <% param_id = session[:request_receive_url_code] -%>
+                <% else -%><% param_id = "" -%>
+                <% end -%>
+                <% amt = 0 -%>
+                <% @content_frames = ContentFrame.where(:master_frame => 0).order('content_frame_order') -%>
+                headerMenu = new Array(
+                <% @content_frames.each.with_index do |content_frame, count| -%>
+                <% amt = amt + 1 -%>
+                  "<%= content_frame.title %>"<% unless amt == @content_frames.length -%>,
+                <% end -%>
+                <% end -%>
+                        );
+                amtHeaderMenu = <%= amt %>;
+                print_header('<%= session[:site_category] %>', '<%= param_id%>');
+                </script>
+                </li>
+
+                <li id="status">
+                  <%#= t('views.login_state.src_ip_address') %><%#= @access_ip %>
+                  <%- unless session[:site_category] -%>
+                  <% if session[:user_id] -%>
+                      <%= t('views.login_state.userid') %>: <%= current_user.login %>
+                      <%#= link_to "[#{t('views.login_state.management')}]", :controller => :user_management, :action => :index -%>
+                      <%= link_to("#{t('views.login_state.logout')}", {:controller => :sessions, :action => :destroy}, {class:"learn-btn"} )%>
+                    <%- end -%>
+                  <%- end -%>
+                </li>
           </ul>
-        </div>
-                               
-
-      <!-- global nav Start -->
-
-      <script type="text/javascript">
-      <% if session[:site_category] == "requested_file_send" and session[:request_send_url_code] -%>
-        <% param_id = session[:request_send_url_code] -%>
-        <% elsif session[:site_category] == "requested_file_receive" and session[:request_receive_url_code] -%>
-        <% param_id = session[:request_receive_url_code] -%>
-      <% else -%><% param_id = "" -%>
-      <% end -%>
-      <% amt = 0 -%>
-      <% @content_frames = ContentFrame.where(:master_frame => 0).order('content_frame_order') -%>
-      headerMenu = new Array(
-      <% @content_frames.each.with_index do |content_frame, count| -%>
-      <% amt = amt + 1 -%>
-        "<%= content_frame.title %>"<% unless amt == @content_frames.length -%>,
-      <% end -%>
-      <% end -%>
-              );
-      amtHeaderMenu = <%= amt %>;
-      print_header('<%= session[:site_category] %>', '<%= param_id%>');
-      </script>
-      
-<!--       <p>MENU</p><a id="trigger-overlay" class="nav_slide_button nav-toggle" href="#"><span></span></a> -->
-      </div><!-- global nav End -->
-  </div>
-
-
-
-  
-
-    <div id="status" class="header-status">
-      <%#= t('views.login_state.src_ip_address') %><%#= @access_ip %>
-      <%- unless session[:site_category] -%>
-      <% if session[:user_id] -%>
-          <%= t('views.login_state.userid') %>: <%= current_user.login %>
-          <%#= link_to "[#{t('views.login_state.management')}]", :controller => :user_management, :action => :index -%>
-          <%= link_to("#{t('views.login_state.logout')}", {:controller => :sessions, :action => :destroy}, {class:"btn btn-small btn-primary"} )%>         
-        <%- end -%>
-      <%- end -%>
-    </div><!-- header-status -->
-    </div><!-- sidebar-nav -->
-
-    <div class="row">
-      <% if flash[:notice] -%>
-        <div id="hint" class="alert alert-success">
-      <%=h flash[:notice] %>
-        </div>
-      <% end -%>
-    </div>
+        </div><!-- global nav End -->
+      </div>
+    </div><!-- row nav-wrapper-->
 
       <% if session[:site_category] == 'system' -%>
-        <div id="sys-main">
-          <div id="sys-menu">
-          </div>
-          <div id="sys-cont">
-          <%= yield %>
-          </div>
+      <div id="sys-main">
+        <div id="sys-menu">
         </div>
+        <div id="sys-cont">
+          <%= yield %>
+        </div>
+      </div>
       <% else -%>
         <%= yield %>
       <% end -%>
-      </div>
 
       <footer>
       <div class="container">
         <div class="row">
           <div class="col-md-5">
-            <h1 class="footer-logo">
-            <%= image_tag("images/Onest-logo_B02.png", :alt => "Onest") %>
-            </h1>
             <p>© Onest 2015 - <a href="#">Licence</a> - Designed &amp; Developed by <a href="#">#####</a></p>
           </div>
           <div class="col-md-7">
@@ -152,6 +117,7 @@ script_url = "<%= url_options[:script_name] %>";
         </div>
       </div>
     </footer>
+
 </div><!-- wrapper -->
 </body>
 </html>

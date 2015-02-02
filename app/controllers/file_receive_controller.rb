@@ -19,6 +19,8 @@
 class FileReceiveController < ApplicationController
   before_filter :load_env
 
+  layout 'file_receive'
+
   # ログイン画面(メールのリンクはここに飛ぶ)
   def login
     session[:auth] = nil

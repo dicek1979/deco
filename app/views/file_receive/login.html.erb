@@ -1,12 +1,35 @@
-<%= form_for(:login, :url => { :action => "auth" }, :html => {:id => 'login', :name=> "login" }) do |f| -%>
-<%#= f.error_message %>
+<div class="wrapper-top">
+  <div class="texture-overlay"></div>
+  <div class="container-signin">
+  <div class="row">
+        <div class="login-icon animated fadeInDown">
+          <%= image_tag("images/Onest-logo_B01.png", :alt => "Onest") %>
+        </div>
+        
+        <div class="flat-form">
+            <div class="form-action show">
+              <% if flash[:notice] -%>
+              <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <%= flash[:notice] %>
+              </div>
+              <% end -%>
 
-<p>
-  <%= f.label :パスワード %><br />
-  <%= f.text_field :receive_password %>
-</p>
-<p>
-    <%= f.submit "送信" %>
-</p>
-<div style="height:250px;"></div>
-<% end -%>
+              <%= form_for(:login, :url => { :action => "auth" }, :html => {:id => 'login', :name=> "login" }) do |f| -%>
+
+              <div class="form-control">
+              	<%= f.text_field :receive_password, :placeholder=>"パスワード入力", autocomplete: "off" %>
+              </div>
+
+              <div class="form-control">
+                <input class="button" type="submit" value="送信"></input>
+              </div>
+              </div>
+              
+              <% end -%>
+            </div>
+            <!--/#login.form-action-->
+        </div>
+  </div>
+</div>
+</div><!-- wrapper-top -->

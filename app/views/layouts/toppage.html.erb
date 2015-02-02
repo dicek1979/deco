@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<script type="text/javascript">
+script_url = "<%= url_options[:script_name] %>";
+</script>
+
+<html>
+<head>
+  <title>Onest-Top</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= render 'layouts/shim' %>
+
+</head>
+
+<% if controller.controller_name == 'top' %>
+  <body class="top">
+<% elsif controller.controller_name == 'file_send'%>
+  <body class="sen">
+<% elsif controller.controller_name == 'file_request'%>
+  <body class="req">
+<% elsif controller.action_name == 'about'%>
+  <body class="srv">
+<% elsif controller.action_name == 'usage'%>
+  <body class="use">
+<% elsif controller.action_name == 'constitution'%>
+  <body class="rul">
+<% elsif controller.action_name == 'ask'%>
+  <body class="con">
+<% else %>
+  <body>
+<% end %>
+
+<div class="wrapper-top">
+  <div class="texture-overlay"></div>
+  <div class="container">
+    <div class="row nav-wrapper">
+      <div class="row">
+        <% if flash[:notice] -%>
+          <div id="hint" class="alert alert-success">
+        <%=h flash[:notice] %>
+          </div>
+      <% end -%>
+      </div>
+
+      <div class="col-md-2 col-sm-2 col-xs-2 text-left">  
+        <%= link_to image_tag("images/Onest-logo_B01.png", :alt => "Onest", class: "logo animated fadeInDown"), root_path %>
+      </div>
+
+      <div class="col-md-6 col-sm-6 col-xs-6 text-right navicon">
+        <div class="pull-right">
+          <ul class="nav pull-right">
+                <li class="dropdown"><h6 style="padding-right:-20px;">MENU</h6><a href="#" class="nav_slide_button nav-toggle" data-toggle="dropdown"><span></span></a>
+                <!-- global nav Start -->
+                <script type="text/javascript">
+                <% if session[:site_category] == "requested_file_send" and session[:request_send_url_code] -%>
+                  <% param_id = session[:request_send_url_code] -%>
+                  <% elsif session[:site_category] == "requested_file_receive" and session[:request_receive_url_code] -%>
+                  <% param_id = session[:request_receive_url_code] -%>
+                <% else -%><% param_id = "" -%>
+                <% end -%>
+                <% amt = 0 -%>
+                <% @content_frames = ContentFrame.where(:master_frame => 0).order('content_frame_order') -%>
+                headerMenu = new Array(
+                <% @content_frames.each.with_index do |content_frame, count| -%>
+                <% amt = amt + 1 -%>
+                  "<%= content_frame.title %>"<% unless amt == @content_frames.length -%>,
+                <% end -%>
+                <% end -%>
+                        );
+                amtHeaderMenu = <%= amt %>;
+                print_header('<%= session[:site_category] %>', '<%= param_id%>');
+                </script>
+                </li>
+
+                <li id="status">
+                  <%#= t('views.login_state.src_ip_address') %><%#= @access_ip %>
+                  <%- unless session[:site_category] -%>
+                  <% if session[:user_id] -%>
+                      <%= t('views.login_state.userid') %>: <%= current_user.login %>
+                      <%#= link_to "[#{t('views.login_state.management')}]", :controller => :user_management, :action => :index -%>
+                      <%= link_to("#{t('views.login_state.logout')}", {:controller => :sessions, :action => :destroy}, {class:"learn-btn"} )%>
+                    <%- end -%>
+                  <%- end -%>
+                </li>
+          </ul>
+        </div><!-- global nav End -->
+      </div>
+    </div><!-- row nav-wrapper-->
+
+      <% if session[:site_category] == 'system' -%>
+      <div id="sys-main">
+        <div id="sys-menu">
+        </div>
+        <div id="sys-cont">
+          <%= yield %>
+        </div>
+      </div>
+      <% else -%>
+        <%= yield %>
+      <% end -%>
+
+      <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5">
+            <p>© Onest 2015 - <a href="#">Licence</a> - Designed &amp; Developed by <a href="#">#####</a></p>
+          </div>
+          <div class="col-md-7">
+            <ul class="footer-nav">
+              <li><a href="#about">About</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#screenshots">Screenshots</a></li>
+              <li><a href="#download">Download</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+</div><!-- wrapper -->
+</body>
+</html>

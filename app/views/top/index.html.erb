@@ -1,5 +1,11 @@
-  <div class="announcement">
-  <div id="info" class="alert alert-info">
+<div class="row main-content">
+  <div class="col-md-12">
+    <h2 class="animated fadeInDown">さぁ、シンプルな共有機能で「簡単に」<br>「安全に」ファイルをシェアしよう。</h2>
+    <h6>「Onest」は大容量のデータをブラウザで安心かつ簡単に送受信できる<br>ウェブアプリケーションです。</h6>
+    <%= link_to("ファイルを送る", {:controller => "file_send", :action => "index"},  {:id => 'm1', class: "use-btn animated fadeInUp"}) %>
+    <%= link_to("ファイルを依頼する", {:controller => "file_request", :action => "index"}, {:id => 'm2',class: "learn-btn animated fadeInUp"}) %>
+
+      <div id="info" class="alert alert-info animated fadeInDown" style="margin:20px 0; width:auto;">
       <% cnt = 0 -%>
       <%- for announcement in @announcements -%>
       <%- cnt = cnt + 1 -%>
@@ -23,22 +29,16 @@
     </div>
     <br>
     <div id='announcement_body_<%= cnt %>' style="display:none;">
-      <%= announcement.body %><br><br></div>
-      <%- end -%>
-      <%- if cnt == 0 -%>
-        現在、お知らせはありません。<br>
-      <%- end -%>
+      <%= announcement.body %><br><br>
     </div>
-  </div>
-
-  <div class="row main-content">
-    <div class="col-md-12">
-      <h2 class="animated fadeInDown">さぁ、シンプルな共有機能で<br>「簡単に」「安全に」ファイルをシェアしよう。</h2>
-      <h6>「Onest」は大容量のデータをブラウザで安心かつ簡単に送受信できる<br>ウェブアプリケーションです。</h6>
-      <%= link_to("ファイルを送る", {:controller => "file_send", :action => "index"},  {:id => 'm1', class: "use-btn animated fadeInUp"}) %>
-      <%= link_to("ファイルを依頼する", {:controller => "file_request", :action => "index"}, {:id => 'm2',class: "learn-btn animated fadeInUp"}) %><i class="fa fa-arrow-down"></i>
-      </div>
-  </div>
+    <%- end -%>
+    <%- if cnt == 0 -%>
+      現在、お知らせはありません。<br>
+    <%- end -%>
+    </div><!-- alert-info -->
+  
+  </div><!-- col-md-12 -->
+</div><!-- row main-content -->
 
 
 <!--   <div id="service">

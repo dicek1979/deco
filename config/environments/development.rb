@@ -40,15 +40,28 @@ Deco::Application.configure do
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   #Gmail setting
-  ActionMailer::Base.delivery_method = :sendmail
-  ActionMailer::Base.sendmail_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => "587",
-    :domain               => "gmail.com",
-    :user_name            => "username@gmail.com",
-    :password             => "password",
-    :authentication       => "plain",
-    :enable_starttls_auto => true
-  }
+   # ActionMailer::Base.delivery_method = :sendmail
+   # ActionMailer::Base.sendmail_settings = {
+  #   :address              => "smtp.gmail.com",
+  #   :port                 => "587",
+  #   :domain               => "gmail.com",
+  #   :user_name            => "username@gmail.com",
+  #   :password             => "password",
+  #   :authentication       => "plain",
+  #   :enable_starttls_auto => true
+  # }
+
+  # ActionMailer::Base.delivery_method = :smtp
+  # ActionMailer::Base.smtp_settings = {
+  # :address              => "piccas.ref",
+  # :port                 => 25,
+  # :domain               => "picsv",
+  # #:user_name            => "<username>",  
+  # #:password             => "<password>",  
+  # :authentication       => "plain",
+  # :enable_starttls_auto => false,
+  # :openssl_verify_mode => 'none'
+  # }
+
 
 end

@@ -8,6 +8,7 @@ script_url = "<%= url_options[:script_name] %>";
 <head>
   <title>Onest パスワード入力 </title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <%= render 'layouts/shim' %>
   <%#= javascript_include_tag  'jquery', 'jquery.validationEngine',
 'swfupload.queue', 'handlers', 'fileprogress' %>
   <%#= stylesheet_link_tag 'os', 'validationEngine.jquery' %>
@@ -17,7 +18,7 @@ script_url = "<%= url_options[:script_name] %>";
   <%= stylesheet_link_tag "application" %>
   <%= stylesheet_link_tag "/assets/application_2.css?body=#{SecureRandom.hex(10)}" if File.exists?("#{Rails.root}/public/assets/application_2.css") %>
   <%= javascript_include_tag "application" %>
-  <%= render 'layouts/shim' %>
+  
 </head>
 <body>
   <%= yield %>

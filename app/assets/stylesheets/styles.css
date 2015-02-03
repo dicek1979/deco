@@ -478,7 +478,7 @@ body.con #global-nav ul li#p_con {
 .table-e .item {
   float: left;
   width: 157px;
-  height: 53px;
+  height: 65px;
   text-align: center;
   padding: 8px;
   border-top: 1px solid #c0c0c0;
@@ -488,7 +488,7 @@ body.con #global-nav ul li#p_con {
 .table-e .input-l {
   float: left;
   width: 450px;
-  height: 53px;
+  height: 65px;
   padding: 8px;
   line-height: 25px;
   border-top: 1px solid #c0c0c0;

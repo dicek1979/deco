@@ -6,9 +6,8 @@ script_url = "<%= url_options[:script_name] %>";
 
 <html>
 <head>
-  <title>Onest</title>
+  <title>Onest ログイン</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <%= render 'layouts/shim' %>
   <%#= javascript_include_tag  'jquery', 'jquery.validationEngine',
 'swfupload.queue', 'handlers', 'fileprogress' %>
   <%#= stylesheet_link_tag 'os', 'validationEngine.jquery' %>
@@ -18,9 +17,37 @@ script_url = "<%= url_options[:script_name] %>";
   <%= stylesheet_link_tag "application" %>
   <%= stylesheet_link_tag "/assets/application_2.css?body=#{SecureRandom.hex(10)}" if File.exists?("#{Rails.root}/public/assets/application_2.css") %>
   <%= javascript_include_tag "application" %>
+  <%= render 'layouts/shim' %>
+  <!-- ↓↓↓　IE8 9 display placeholder ↓↓↓↓-->
+  <script>
+
+     (function ($) {
+         $.support.placeholder = ('placeholder' in document.createElement('input'));
+     })(jQuery);
+
+
+     //fix for IE7 and IE8
+     $(function () {
+         if (!$.support.placeholder) {
+             $("[placeholder]").focus(function () {
+                 if ($(this).val() == $(this).attr("placeholder")) $(this).val("");
+             }).blur(function () {
+                 if ($(this).val() == "") $(this).val($(this).attr("placeholder"));
+             }).blur();
+
+             $("[placeholder]").parents("form").submit(function () {
+                 $(this).find('[placeholder]').each(function() {
+                     if ($(this).val() == $(this).attr("placeholder")) {
+                         $(this).val("");
+                     }
+                 });
+             });
+         }
+     });
+  </script>
+
 </head>
 <body>
-  <%= yield %>
-  
+  <%= yield %> 
 </body>
 </html>

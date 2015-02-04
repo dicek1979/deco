@@ -50,18 +50,17 @@ Deco::Application.configure do
   #   :authentication       => "plain",
   #   :enable_starttls_auto => true
   # }
-
-  # ActionMailer::Base.delivery_method = :smtp
-  # ActionMailer::Base.smtp_settings = {
-  # :address              => "piccas.ref",
-  # :port                 => 25,
-  # :domain               => "picsv",
-  # #:user_name            => "<username>",  
-  # #:password             => "<password>",  
-  # :authentication       => "plain",
-  # :enable_starttls_auto => false,
-  # :openssl_verify_mode => 'none'
-  # }
+  ActionMailer::Base.delivery_method = :sendmail
+  ActionMailer::Base.smtp_settings = {
+  :address              => "piccas.ref.melco.co.jp",
+  :port                 => 25,
+  :domain               => "picsv0768.pic.melco.co.jp",
+  #:user_name            => "<username>",  
+  #:password             => "<password>",  
+  :authentication       => "plain",
+  :enable_starttls_auto => false,
+  :openssl_verify_mode => 'none'
+  }
 
 
 end

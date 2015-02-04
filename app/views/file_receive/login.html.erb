@@ -1,27 +1,32 @@
 <div class="wrapper-top">
-  <div class="texture-overlay"></div>
+  <!-- <div class="texture-overlay"></div> -->
   <div class="container-signin">
-  <div class="row">
-        <div class="login-icon animated fadeInDown">
-          <%= image_tag("images/Onest-logo_B01.png", :alt => "Onest") %>
-        </div>
-        
-        <div class="flat-form">
-            <div class="form-action show">
-              <% if flash[:notice] -%>
+                  <% if flash[:notice] -%>
               <div class="alert alert-success">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
               <%= flash[:notice] %>
               </div>
               <% end -%>
+    <div class="row">
+        <div class="login-icon animated fadeInDown">
+          <%= image_tag("images/Onest-logo_B01.png", :alt => "Onest") %>
+        </div>
+
+        <div class="flat-form">
+            <div class="form-action show">
+
+
+              <div class="form-group textarea">
+                <p style="color: #fff;">メールで受信したパスワードを以下に入力してください。</p>
+              </div>
 
               <%= form_for(:login, :url => { :action => "auth" }, :html => {:id => 'login', :name=> "login" }) do |f| -%>
 
-              <div class="form-control">
-              	<%= f.text_field :receive_password, :placeholder=>"パスワード入力", autocomplete: "off" %>
+              <div class="form-group">
+              	<%= f.text_field :receive_password, :placeholder=>"パスワード入力", autocomplete: "off", class:"form-control login-field" %>
               </div>
 
-              <div class="form-control">
+              <div class="form-group">
                 <input class="button" type="submit" value="送信"></input>
               </div>
               </div>

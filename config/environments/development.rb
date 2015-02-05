@@ -52,9 +52,9 @@ Deco::Application.configure do
   # }
   ActionMailer::Base.delivery_method = :sendmail
   ActionMailer::Base.smtp_settings = {
-  :address              => "piccas.ref.melco.co.jp",
+  :address              => "piccas.ref",
   :port                 => 25,
-  :domain               => "picsv0768.pic.melco.co.jp",
+  :domain               => "picsv0768.",
   #:user_name            => "<username>",  
   #:password             => "<password>",  
   :authentication       => "plain",

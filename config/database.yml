@@ -20,10 +20,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: deco_development
+  database: onest_development
   pool: 5
-  username: deco
-  password: deco
+  username: onest
+  password: neptunes
   socket: <%= socket %>
 
 # Warning: The database defined as "test" will be erased and
@@ -43,9 +43,9 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: deco_production
+  database: onest_production
   pool: 5
   host: localhost
-  username: deco
-  password: deco
+  username: onest
+  password: neptunes
   socket: <%= socket %>

@@ -6,7 +6,7 @@ script_url = "<%= url_options[:script_name] %>";
 
 <html>
 <head>
-  <title>Onest パスワード入力 </title>
+  <title>Onest ファイル受け取り</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <%#= javascript_include_tag  'jquery', 'jquery.validationEngine',
 'swfupload.queue', 'handlers', 'fileprogress' %>
@@ -17,14 +17,12 @@ script_url = "<%= url_options[:script_name] %>";
   <%= stylesheet_link_tag "application" %>
   <%= stylesheet_link_tag "/assets/application_2.css?body=#{SecureRandom.hex(10)}" if File.exists?("#{Rails.root}/public/assets/application_2.css") %>
   <%= javascript_include_tag "application" %>
-  <%= render 'layouts/shim' %>
   <!-- ↓↓↓　IE8 9 display placeholder ↓↓↓↓-->
   <script>
 
      (function ($) {
          $.support.placeholder = ('placeholder' in document.createElement('input'));
      })(jQuery);
-
 
      //fix for IE7 and IE8
      $(function () {
@@ -45,6 +43,7 @@ script_url = "<%= url_options[:script_name] %>";
          }
      });
  </script>
+  <%= render 'layouts/shim' %>
 </head>
 <body>
   <%= yield %>

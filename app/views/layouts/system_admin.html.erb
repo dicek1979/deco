@@ -6,98 +6,113 @@ script_url = "<%= url_options[:script_name] %>";
 
 <html>
 <head>
-  <title>システム管理 - DECO Drive</title>
+  <title>Onest Admin</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
+      <!-- Le styles -->
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
 </head>
 
-<% if controller.controller_name == 'top' %>
-  <body class="top">
-<% elsif controller.controller_name == 'file_send'%>
-  <body class="sen">
-<% elsif controller.controller_name == 'file_request'%>
-  <body class="req">
-<% elsif controller.action_name == 'about'%>
-  <body class="srv">
-<% elsif controller.action_name == 'usage'%>
-  <body class="use">
-<% elsif controller.action_name == 'constitution'%>
-  <body class="rul">
-<% elsif controller.action_name == 'ask'%>
-  <body class="con">
-<% else %>
-  <body>
-<% end %>
-
-<div id="header">
-<%= image_tag('common/deco_logo01.jpg', :alt => "DECO Drive", :border => 0) %>
-</div>
-
-<div id="status">
-[<%= `hostname`.chop -%>]
-接続IPアドレス:<%= @access_ip %>
-<% if session[:user_id] -%>
-  利用状況:外部アクセス( ユーザID: <%= current_user.login %> )
-  <%= link_to '[ログアウト]', :controller => :sessions, :action => :logout_for_administrator %>
-<% else -%>
-  利用状況:ローカルアクセス又は外部から
-<% end -%>
-</div>
-
-
-<div id="main">
-
-
-<div id="sys-main">
-  <div id="sys-menu">
-  <br>
-  <ul><li><%= link_to "トップ", :controller => :sys_top %><br></li></ul>
-  アナウンス管理
-  <ul><li><%= link_to "アナウンス管理", :controller => :sys_announcement %></li></ul>
-  パラメータ管理
-  <ul><li><%= link_to "共通項目", :controller => :sys_param, :action => :common_index %></li>
-  <li><%= link_to "ローカルユーザ", :controller => :sys_param, :action => :user_type_index, :id => :local %></li>
-  <li><%= link_to "リモートユーザ", :controller => :sys_param, :action => :user_type_index, :id => :remote %></li></ul>
-  ユーザ管理
-  <ul><li><%= link_to "システム管理者", :controller => :sys_user, :id => 1 %></li>
-  <li><%= link_to "リモートユーザ", :controller => :sys_user, :id => 2 %></li></ul>
-  決裁管理
-  <ul><li><%= link_to "決裁登録", :controller => :sys_moderate %></li></ul>
-  コンテンツ管理
-  <ul><li><%= link_to "コンテンツ管理", :controller => :sys_content %></li></ul>
-  登録データ確認
-  <ul><li><%= link_to "登録データ確認", :controller => :sys_data %></li></ul>
-  ログ閲覧
-  <ul><li><%= link_to "送信ログ", :controller => :sys_log, :action => :send_log %></li>
-  <li><%= link_to "受信ログ", :controller => :sys_log, :action => :receive_log %></li>
-  <li><%= link_to "依頼ログ", :controller => :sys_log, :action => :request_log %></li></ul>
-  実績集計
-  <ul><li><%= link_to "実績集計", :controller => :sys_total %></li></ul>
-  </div>
-
-  <div id="sys-cont">
-
-  <% if session[:section_title] -%>
-    <h1><%= session[:section_title] %></h1>
-  <% end -%>
-
-  <% if flash[:error] -%>
-    <div id="err-sys">
-  <%= flash[:error] %>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+      </button>
+      <div id="header">
+        <div class="nav-collapse collapse">
+          <p class="navbar-text pull-right">
+            [<%= `hostname`.chop -%>]
+            接続IPアドレス:<%= @access_ip %>
+            <% if session[:user_id] -%>
+              利用状況:外部アクセス( ユーザID: <%= current_user.login %> )
+              <%= link_to '[ログアウト]', :controller => :sessions, :action => :logout_for_administrator %>
+            <% else -%>
+              利用状況:ローカルアクセス又は外部から
+            <% end -%>
+          </p>
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
     </div>
-  <% end -%>
-  <% if flash[:notice] -%>
-    <div id="hint-sys">
-  <%= flash[:notice] %>
-    </div>
-  <% end -%>
-
-  <%= yield %>
   </div>
 </div>
 
+<div class="container-fluid">
+    <div class="row-fluid">
+
+      <div class="span3">
+        <div class="well sidebar-nav">
+          <ul class="nav nav-list">
+            <li class="nav-header">メニュー</li>
+            <li class"active"><%= link_to "トップ", :controller => :sys_top %></li>
+            <li><%= link_to "アナウンス管理", :controller => :sys_announcement %></li>
+            <li class="nav-header">パラメータ管理</li>
+            <li><%= link_to "共通項目", :controller => :sys_param, :action => :common_index %></li>
+            <li><%= link_to "ローカルユーザ", :controller => :sys_param, :action => :user_type_index, :id => :local %></li>
+            <li><%= link_to "リモートユーザ", :controller => :sys_param, :action => :user_type_index, :id => :remote %></li>
+            <li class="nav-header">ユーザ管理</li>
+            <li><%= link_to "システム管理者", :controller => :sys_user, :id => 1 %></li>
+            <li><%= link_to "リモートユーザ", :controller => :sys_user, :id => 2 %></li>
+            <li class="nav-header">決裁管理</li>
+            <li><%= link_to "決裁登録", :controller => :sys_moderate %></li>
+            <li class="nav-header">コンテンツ管理</li>
+            <li><%= link_to "コンテンツ管理", :controller => :sys_content %></li>
+            <li class="nav-header">登録データ確認</li>
+            <li><%= link_to "登録データ確認", :controller => :sys_data %></li>
+            <li class="nav-header">ログ閲覧</li>
+            <li><%= link_to "送信ログ", :controller => :sys_log, :action => :send_log %></li>
+            <li><%= link_to "受信ログ", :controller => :sys_log, :action => :receive_log %></li>
+            <li><%= link_to "依頼ログ", :controller => :sys_log, :action => :request_log %></li>
+            <li class="nav-header">実績集計</li>
+            <li><%= link_to "実績集計", :controller => :sys_total %></li>
+          </ul>
+        </div><!--/.well -->
+      </div><!--/span-->
+
+      <div class="span9">
+            <div class="hero-unit">
+            <% if session[:section_title] -%>
+              <h4><%= session[:section_title] %></h4>
+            <% end -%>
+            <% if flash[:error] -%>
+              <div id="err-sys">
+                <%= flash[:error] %>
+              </div>
+            <% end -%>
+            <% if flash[:notice] -%>
+              <div id="hint-sys">
+                <%= flash[:notice] %>
+              </div>
+            <% end -%>
+            <div>
+            <%= yield %>
+            </div>
+      </div><!--/span-->
+
+    </div><!--/row-->
 </div>
+
 
 </body>
 </html>

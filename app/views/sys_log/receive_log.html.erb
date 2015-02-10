@@ -18,54 +18,62 @@
 
 <% count = 0 -%>
 
-<table border=1 cellspacing=0 cellpadding=3>
-  <tr bordercolor=gray>
-  <td nowrap bgcolor=#e5f0fe><br></td>
-  <td nowrap bgcolor=#e5f0fe>ＤＬ日</td>
-  <td nowrap bgcolor=#e5f0fe>区分</td>
-  <td nowrap bgcolor=#e5f0fe>受信者</td>
-  <td nowrap bgcolor=#e5f0fe>受信者メールアドレス</td>
-  <td nowrap bgcolor=#e5f0fe>ファイル名</td>
-  <td nowrap bgcolor=#e5f0fe>ファイルサイズ</td>
-  </tr>
-  <%# if @receives_files -%>
-    <%# @receives_files.each.with_index do | receives_file, count | -%>
-  <% if @rs -%>
-    <% @rs.each do | data | -%>
-      <% count = count + 1 -%>
-      <% cr_id = count -%>
-      <% if @s_data <= cr_id and cr_id <= @e_data -%>
-        <% if data.file_size.to_i > 1024 * 1024 -%>
-          <% label_file_size = (data.file_size.to_i / (1024 * 1024)).to_s + ' MB' -%>
-        <% elsif data.file_size.to_i > 1024 -%>
-          <% label_file_size = (data.file_size.to_i / 1024).to_s + ' KB' -%>
-        <% else -%>
-          <% label_file_size = data.file_size.to_s + ' B' -%>
-        <% end -%>
+<div class="widget stacked widget-table action-table">
+  <div class="widget-header">
+    <i class="icon-th-list"></i><h3>受信ログ閲覧</h3>
+  </div><!-- /widget-header -->
 
-        <tr bordercolor=gray>
-        <td nowrap><%= count %></td>
+  <div class="widget-content">
+  <table class="table table-striped table-bordered">
+  <thead>
+      <tr>
+        <th>#</th>
+        <th>DL日</th>
+        <th>区分</th>
+        <th>受信者</th>
+        <th>受信者メールアドレス</th>
+        <th>ファイル名</th>
+        <th>ファイルサイズ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @rs -%>
+    <% @rs.each do | data | -%>
+    <% count = count + 1 -%>
+    <% cr_id = count -%>
+    <% if @s_data <= cr_id and cr_id <= @e_data -%>
+    <% if data.file_size.to_i > 1024 * 1024 -%>
+      <% label_file_size = (data.file_size.to_i / (1024 * 1024)).to_s + ' MB' -%>
+    <% elsif data.file_size.to_i > 1024 -%>
+      <% label_file_size = (data.file_size.to_i / 1024).to_s + ' KB' -%>
+    <% else -%>
+      <% label_file_size = data.file_size.to_s + ' B' -%>
+    <% end -%>
+
+    <tr>
+      <td><%= count %></td>
         <!--td nowrap><%#= (Time.parse(receives_file.dl_at.to_s)).strftime("%Y/%m/%d %H:%M:%S") %></td>
         <td nowrap><%#= receives_file.flg %></td>
         <td nowrap><%#= receives_file.receiver_name %></td>
         <td nowrap><%#= receives_file.receiver_mail_address %></td>
         <td nowrap><%#= receives_file.file_name %></td-->
-        <td nowrap><%= (Time.parse(data.dl_at.to_s)).strftime("%Y/%m/%d %H:%M:%S") %></td>
-        <td nowrap><%= data.flg %></td>
-        <td nowrap><%= data.receiver_name %></td>
-        <td nowrap><%= data.receiver_mail_address %></td>
-        <td nowrap><%= data.file_name %></td>
-        <td nowrap><%= label_file_size %></td>
-        </tr>
-      <% end -%>
+        <td><%= (Time.parse(data.dl_at.to_s)).strftime("%Y/%m/%d %H:%M:%S") %></td>
+        <td><%= data.flg %></td>
+        <td><%= data.receiver_name %></td>
+        <td><%= data.receiver_mail_address %></td>
+        <td><%= data.file_name %></td>
+        <td><%= label_file_size %></td>
+    </tr>
     <% end -%>
-  <% else -%>
+    <% end -%>
+    <% else -%>
     <tr>
       <td colspan=7 algin=center>データがありません</td>
     </tr>
-  <% end -%>
-  <% if count == 0 -%>
+    <% end -%>
+    <% if count == 0 -%>
     <tr><td colspan=7 algin=center>データがありません</td></tr>
-  <% end -%>
-</table>
-
+    <% end -%>
+  </table>
+  </div> <!-- /widget-content -->
+</div> <!-- /widget -->

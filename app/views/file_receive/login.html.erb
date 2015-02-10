@@ -1,12 +1,11 @@
 <div class="wrapper-top">
   <!-- <div class="texture-overlay"></div> -->
   <div class="container-signin">
-                  <% if flash[:notice] -%>
-              <div class="alert alert-success">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <%= flash[:notice] %>
-              </div>
-              <% end -%>
+    <% if flash[:notice] -%>
+      <div id="hint" class="alert alert-success">
+      <%=h flash[:notice] %>
+      </div>
+    <% end -%>
     <div class="row">
         <div class="login-icon animated fadeInDown">
           <%= image_tag("images/Onest-logo_B01.png", :alt => "Onest") %>
@@ -14,7 +13,6 @@
 
         <div class="flat-form">
             <div class="form-action show">
-
 
               <div class="form-group textarea">
                 <p style="color: #fff;">メールで受信したパスワードを以下に入力してください。</p>

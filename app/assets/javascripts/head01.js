@@ -1,6 +1,6 @@
 function print_header(site_category, param_id) {
 
-  document.write("<ul class=\"dropdown-menu pull-right\">");
+  document.write("<ul class=\"dropdown-menu\">");
 
   switch (site_category) {
   case "file_receive":

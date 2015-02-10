@@ -1,4 +1,4 @@
-Deco::Application.configure do
+Onest::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -40,8 +40,8 @@ Deco::Application.configure do
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   #Gmail setting
-   # ActionMailer::Base.delivery_method = :sendmail
-   # ActionMailer::Base.sendmail_settings = {
+  # ActionMailer::Base.delivery_method = :sendmail
+  # ActionMailer::Base.sendmail_settings = {
   #   :address              => "smtp.gmail.com",
   #   :port                 => "587",
   #   :domain               => "gmail.com",
@@ -50,17 +50,17 @@ Deco::Application.configure do
   #   :authentication       => "plain",
   #   :enable_starttls_auto => true
   # }
-  ActionMailer::Base.delivery_method = :sendmail
+  
+  ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-  :address              => "piccas.ref",
+  :address              => "piccas.ref.",
   :port                 => 25,
-  :domain               => "picsv0768.",
+  :domain               => "picsv0768.pic.",
   #:user_name            => "<username>",  
   #:password             => "<password>",  
   :authentication       => "plain",
   :enable_starttls_auto => false,
   :openssl_verify_mode => 'none'
   }
-
-
+  
 end

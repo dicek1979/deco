@@ -41,13 +41,13 @@ target_url = "<%= url_for(:controller => :file_send, :action => :upload) %>";
   :html => {:id => 'send_matter', :name=> "send_matter", :multipart => true }) do |f| -%>
 <%= f.hidden_field :relayid, {:value => @relay_id} %>
 
-<h1>ファイル送信（簡易バージョン）</h1>
+<h3>ファイル送信（簡易バージョン）</h3>
 
 <p class="comment">正常に送信できない場合はこの画面から送信が可能です。<br />
 以下のフォームに必要事項を記入し，[ファイルを送信する]をクリックしてください。
 <%- -%>（<span class="required">※</span> 印は必須項目です。）</p>
 
-<h2>１．送信者情報入力　（あなたの情報を入力してください）</h2>
+<h4>１．送信者情報入力　（あなたの情報を入力してください）</h4>
 
     <fieldset>
 
@@ -85,7 +85,7 @@ target_url = "<%= url_for(:controller => :file_send, :action => :upload) %>";
 
     </fieldset>
 
-    <h2>２．パスワード，その他の設定</h2>
+    <h4>２．パスワード，その他の設定</h4>
 
     <fieldset>
 
@@ -141,13 +141,13 @@ target_url = "<%= url_for(:controller => :file_send, :action => :upload) %>";
 </div>
      </fieldset>
 
-    <h2>３．受取人情報入力　（ファイルを受け取る相手の情報を入力してください）</h2>
+    <h4>３．受取人情報入力　（ファイルを受け取る相手の情報を入力してください）</h4>
 
 <%= render 'receivers' %>
 
 <fieldset>
 
-    <h2>４．送信するファイルの選択</h2>
+    <h4>４．送信するファイルの選択</h4>
 
     <span class="left"><%= $app_env['FILE_SEND_LIMIT'] %>ファイル
     （合計<%= $app_env['FILE_TOTAL_SIZE_LIMIT'] %>MB）まで送信できます。
@@ -169,7 +169,10 @@ target_url = "<%= url_for(:controller => :file_send, :action => :upload) %>";
 <% end %>
 <span class="right"><input type="button" onclick="add_file('attachment', 'add_files')" value="+ ファイルを追加" /></span>
 
-    <p id="submitbtn" align="center"><%= image_submit_tag("common/but_send.gif" ) %></p>
+    <br /><br />
+    <div class="text-center"> 
+      <input id="submitbtn" class="use-btn" type="submit" value="ファイルを送信する"></input>
+    </div>
     <br /><br />
 
 

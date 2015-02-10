@@ -9,22 +9,21 @@
         <div class="flat-form">
             <div class="form-action show">
               <% if flash[:notice] -%>
-              <div class="alert alert-success">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <%= flash[:notice] %>
+              <div id="hint" class="alert alert-success fadeOut">
+              <%=h flash[:notice] %>
               </div>
               <% end -%>
 
               <%= form_tag  :action => :create do -%>
-              <div class="form-control">
+              <div class="form-group">
                 <%= text_field_tag 'login', @login, :placeholder=>"ユーザー名", autofocus: true %>
               </div>
 
-              <div class="form-control">
+              <div class="form-group">
                 <%= password_field_tag 'password', @password, :placeholder=>"パスワード入力", autocomplete: "off" %>
               </div>
 
-              <div class="form-control">
+              <div class="form-group">
                 <input class="button" type="submit" value="ログイン"></input>
               </div>
               

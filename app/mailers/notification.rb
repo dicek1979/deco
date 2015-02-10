@@ -24,10 +24,10 @@ class Notification < ActionMailer::Base
              "category = 0"].join(" AND "))
       .first
   if app_env_from_mail_address.present?
-    default :charset => 'ISO-2022-JP', :from => "Eドキュメント <edoc@doc.com>"
+    default :charset => 'ISO-2022-JP', :from => "株式会社<densif@info.co.jp>"
     #default from: app_env_from_mail_address.value
   else
-    default :charset => 'ISO-2022-JP', :from => "Eドキュメント <edoc@doc.com>"
+    default :charset => 'ISO-2022-JP', :from => "株式会社<densif@info.co.jp>"
     #default from: "from@example.com"
   end
 

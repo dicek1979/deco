@@ -1,55 +1,64 @@
   <fieldset>
-  <h2>登録決裁一覧</h2>
-  <div align="right"><%= link_to '新規作成', {:controller => 'sys_moderate', :action => 'new'} %></div>
-  <table class="system-content">
-    <thead>
-      <tr>
-        <th width=30% class="c1">決裁名</th>
-        <th width=15%>決裁内容</th>
-        <th width=35%>決裁者</th>
-        <th width=20%></th>
-      </tr>
-    </thead>
-    <% if @moderates.length > 0 %>
-    <tbody>
-      <% for moderate in @moderates -%>
-      <tr>
-        <td class="c1"><%= moderate.name %></td>
-        <td><% if moderate.type_flag == 1 %>
+  <%= link_to '新規作成', {:controller => 'sys_moderate', :action => 'new'} , {class:"btn btn-primary btn-xs pull-right"}%>
+  <br><br>
+
+  <div class="widget stacked widget-table action-table">
+  <div class="widget-header">
+    <i class="icon-th-list"></i><h3>登録決裁一覧</h3>
+  </div><!-- /widget-header -->
+
+  <div class="widget-content">
+  <table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>決裁名</th>
+      <th>決裁内容</th>
+      <th>決裁者</th>
+      <th></th>
+    </tr>
+  </thead>
+  <% if @moderates.length > 0 %>
+  <tbody>
+    <% for moderate in @moderates -%>
+    
+    <tr>
+      <td><%= moderate.name %></td>
+      <td>
+        <% if moderate.type_flag == 1 %>
             簡易決裁
-            <% else %>
+        <% else %>
             通常決裁
-            <% end %>
-        </td>
-        <td>
+        <% end %>
+      </td>
+      <td>
         <% moderater_count = 0 %>
         <% for moderater in moderate.moderaters %>
-          <% if moderater.user.present? %>
-            <% unless moderater_count == 0 %>
-            <br>
-            <% end %>
-            <%= moderater.user.name %>(<%= moderater.user.login %>)
-          <% moderater_count += 1 %>
-          <% end %>
+        <% if moderater.user.present? %>
+          <% unless moderater_count == 0 %>
+          <br>
         <% end %>
-        </td>
-        <td>
-          <%= link_to '[編集]', {:action => 'edit', :id => moderate.id } %>
-          <%= link_to '[削除]', {:action => 'destroy', :id => moderate.id},
+          <%= moderater.user.name %>(<%= moderater.user.login %>)
+          <% moderater_count += 1 %>
+        <% end %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to '[編集]', {:action => 'edit', :id => moderate.id } %>
+        <%= link_to '[削除]', {:action => 'destroy', :id => moderate.id},
                                  :data => {:confirm => '削除します。よろしいですか?'},
                                  :method => :delete -%>
-        </td>
+      </td>
       </tr>
+      <%- end -%>
+      </tbody>
+      <tbody>
+        <td class="c1"></td>
+        <td>登録データがありません</td>
+        <td><br></td>
+      </tbody>
       <% end %>
-    </tbody>
-    <% else %>
-    <tbody>
-      <td class="c1"></td>
-      <td>登録データがありません</td>
-      <td><br></td>
-    </tbody>
-    <% end %>
-  </table>
+  
+    </table>
+    </div> <!-- /widget-content -->
+  </div> <!-- /widget -->
   </fieldset>
-
-<br><br><br>

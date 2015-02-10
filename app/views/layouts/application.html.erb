@@ -8,9 +8,9 @@ script_url = "<%= url_options[:script_name] %>";
 <head>
   <title>Onest</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <%= render 'layouts/shim' %>
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
+  <%= render 'layouts/shim' %>
 </head>
 
 <% if controller.controller_name == 'top' %>

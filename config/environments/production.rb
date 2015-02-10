@@ -1,4 +1,4 @@
-Deco::Application.configure do
+Onest::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -68,6 +68,19 @@ Deco::Application.configure do
   config.logger.formatter = Logger::Formatter.new
   config.logger.datetime_format = "%Y-%m-%d %H:%M:%S"
 
-  ActionMailer::Base.smtp_settings[:address] = "localhost"
-  ActionMailer::Base.smtp_settings[:domain] = "example.com"
+  #ActionMailer::Base.smtp_settings[:address] = "localhost"
+  #ActionMailer::Base.smtp_settings[:domain] = "example.com"
+
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+  :address              => "piccas.ref.",
+  :port                 => 25,
+  :domain               => "picsv0768.pic.",
+  #:user_name            => "<username>",  
+  #:password             => "<password>",  
+  :authentication       => "plain",
+  :enable_starttls_auto => false,
+  :openssl_verify_mode => 'none'
+  }
+
 end

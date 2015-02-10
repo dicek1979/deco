@@ -1,4 +1,4 @@
-Deco::Application.routes.draw do
+Onest::Application.routes.draw do
   get "user_environment/index"
 
 #  get "user_management/index"

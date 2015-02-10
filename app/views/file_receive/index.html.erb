@@ -1,4 +1,4 @@
-<div class="wrapper-top">
+<div class="wrapper-sub">
 <!--   <div class="texture-overlay"></div> -->
   <div class="container-signin">
       <div class="row">
@@ -11,10 +11,9 @@
       <div class="flat-form-receive">
         <div class="form-action show">
           <% if flash[:notice] -%>
-          <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <%= flash[:notice] %>
-          </div>
+            <div id="hint" class="alert alert-success fadeOut">
+              <%=h flash[:notice] %>
+            </div>
           <% end -%>
 
           <div class="form-group">
@@ -23,79 +22,80 @@
 
           <div class="form-group">
             <table class="table table-striped table-bordered table-hover" style="background: #fff;">
-        <tbody>
-          <tr>
-            <td>ファイル送信者名</td>
-            <td><%=h @send_matter.name %>
-                  &nbsp;&nbsp;（<%=h @send_matter.mail_address %>）</td>
-          </tr>
-          <tr>
-            <td>ファイル受信者名</td>
-            <td><%=h @receiver.name %>
-                  &nbsp;様&nbsp;（<%=h @receiver.mail_address %>）</td>
-          </tr>
-          <tr>
-            <td>ファイルお預かり日時</td>
-            <td>
-              <% if @send_matter.sent_at.present? %>
-                      <%= Time.parse(@send_matter.sent_at.to_s).strftime("%Y年%m月%d日%H時%M分%S秒") %></div>
-              <% elsif @send_matter.moderate_flag == nil %>
-                      <%= Time.parse(@send_matter.created_at.to_s).strftime("%Y年%m月%d日%H時%M分%S秒") %></div>
-              <% else %>
-                      </div>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td>お預かりしているファイル</td>
-            <td>
-              <div class="table-d">
-                <div class="item-l">ファイル名</div>
-                  <div class="item-r"></div>
-                    <% if @attachments.size > 0 %>
-                      <% @attachments.each_with_index do |attachment, index| %>
-                      <% if(attachment.virus_check != '0') %>
-                      <% else %>
-                      <div class="input-l"><%= index + 1 %>. <%=h truncate(attachment.name, {:lenth => 28}) %>（<%=h show_file_size(attachment) %>）</div>
-                      <div class="input-r"><%= link_to "ダウンロード", {:action => 'get', :id => attachment.id}, {class:"btn use-btn"} %></div>
-                      <% end %>
-                      <% end %>
-                      <% else %>
-                      <div class="input-l">
-                      <%=h @send_matter.name %> 様がファイルを削除しました。
-                      </div>
-                      <div class="input-r"></div>
+              <tbody>
+                <tr>
+                  <td>ファイル送信者名</td>
+                  <td><%=h @send_matter.name %>
+                        &nbsp;&nbsp;（<%=h @send_matter.mail_address %>）</td>
+                </tr>
+                <tr>
+                  <td>ファイル受信者名</td>
+                  <td><%=h @receiver.name %>
+                        &nbsp;様&nbsp;（<%=h @receiver.mail_address %>）</td>
+                </tr>
+                <tr>
+                  <td>ファイルお預かり日時</td>
+                  <td>
+                    <% if @send_matter.sent_at.present? %>
+                            <%= Time.parse(@send_matter.sent_at.to_s).strftime("%Y年%m月%d日%H時%M分%S秒") %></div>
+                    <% elsif @send_matter.moderate_flag == nil %>
+                            <%= Time.parse(@send_matter.created_at.to_s).strftime("%Y年%m月%d日%H時%M分%S秒") %></div>
+                    <% else %>
+                            </div>
                     <% end %>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>送信者からのメッセージ</td>
-            <td>
-              <% if @send_matter.message == '' %>
-              <div class="input-mid">　</div>
-              <% else %>
-              <div class="input-mid"><%=h @send_matter.message %></div>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td>ファイル保管期限</td>
-            <td>
-              <% if @send_matter.sent_at.present? %>
-                <div class="input-bot"><%=h (Time.parse(@send_matter.sent_at.to_s) +
-                                  @send_matter.file_life_period).strftime("%Y年%m月%d日%H時%M分%S秒") %></div>
-                <% elsif @send_matter.moderate_flag == nil %>
-                <div class="input-bot"><%=h (Time.parse(@send_matter.created_at.to_s) +
-                                  @send_matter.file_life_period).strftime("%Y年%m月%d日%H時%M分%S秒") %></div>
-                <% else %>
-                <div class="input-bot">&nbsp;</div>
-                <% end %>
-            </td>
-          </tr>
+                  </td>
+                </tr>
+                <tr>
+                  <td>お預かりしているファイル</td>
+                  <td>
+                  <table >
+                    <% if @attachments.size > 0 %>
+                    <% @attachments.each_with_index do |attachment, index| %>
+                    <% if(attachment.virus_check != '0') %>
+                    <% else %>
 
-        </tbody>
-        </table>
+                    <tr>
+                      <td><%= index + 1 %>. <%=h truncate(attachment.name, {:lenth => 28}) %>（<%=h show_file_size(attachment) %>）</td>
+                      <td><%= link_to "ダウンロード", {:action => 'get', :id => attachment.id}, {class:"btn btn-info"} %></td>
+                    </tr>
+                    <% end %>
+                    <% end %>
+                    <% else %>
+                    <div class="input-l">
+                    <%=h @send_matter.name %> 様がファイルを削除しました。
+                    </div>
+                    <div class="input-r"></div>
+                    <% end %>
+              
+                  </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>送信者からのメッセージ</td>
+                  <td>
+                    <% if @send_matter.message == '' %>
+                    <div class="input-mid">　</div>
+                    <% else %>
+                    <div class="input-mid"><%=h @send_matter.message %></div>
+                    <% end %>
+                  </td>
+                </tr>
+                <tr>
+                  <td>ファイル保管期限</td>
+                  <td>
+                    <% if @send_matter.sent_at.present? %>
+                      <div class="input-bot"><%=h (Time.parse(@send_matter.sent_at.to_s) +
+                                        @send_matter.file_life_period).strftime("%Y年%m月%d日%H時%M分%S秒") %></div>
+                      <% elsif @send_matter.moderate_flag == nil %>
+                      <div class="input-bot"><%=h (Time.parse(@send_matter.created_at.to_s) +
+                                        @send_matter.file_life_period).strftime("%Y年%m月%d日%H時%M分%S秒") %></div>
+                      <% else %>
+                      <div class="input-bot">&nbsp;</div>
+                      <% end %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           
         </div>
         </div>

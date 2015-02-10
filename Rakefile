@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Deco::Application.load_tasks
+Onest::Application.load_tasks

@@ -1,54 +1,89 @@
-
-  <%- this_year = 0 -%>
-  <%- 1.upto(12) do |i| -%>
-    <%- this_time = @c_time.months_ago(i - 1) -%>
-    <%- unless this_year == this_time.year -%>
-      <br><%= this_time.year.to_s + "年　" -%>
-      <%- this_year = this_time.year -%>
-    <%- end -%>
-    <%= link_to this_time.month.to_s + "月" , {:id => i} -%>
-    <%= "　" -%>
+<%- this_year = 0 -%>
+<%- 1.upto(12) do |i| -%>
+  <%- this_time = @c_time.months_ago(i - 1) -%>
+  <%- unless this_year == this_time.year -%>
+    <br><%= this_time.year.to_s + "年　" -%>
+    <%- this_year = this_time.year -%>
   <%- end -%>
+  <%= link_to this_time.month.to_s + "月" , {:id => i} -%>
+  <%= "　" -%>
+<%- end -%>
 
-  <h2><%= @this_month.year -%>年<%= @this_month.month -%>月度　実績集計</h2>
-
-  <fieldset>
-  <h3>送信</h3>
-  <div class="table-sys-a">
-      <div class="item-mid">利用者数</div>
-      <div class="input-mid-2-l" align="right"><%= @send_matter %><br></div>
-      <div class="input-mid-2-r">人</div>
-
-      <div class="item-mid">ファイル数</div>
-      <div class="input-mid-2-l" align="right"><%= @file_total %><br></div>
-      <div class="input-mid-2-r">ファイル</div>
-
-      <div class="item-mid">ファイルサイズ</div>
-      <div class="input-mid-2-l" align="right"><%= @file_size %><br></div>
-      <div class="input-mid-2-r">ＭＢ</div>
-  </div>
-  </fieldset>
+  <h4><%= @this_month.year -%>年<%= @this_month.month -%>月度　実績集計</h4>
 
   <fieldset>
-  <h3>受信</h3>
-  <div class="table-sys-a">
-      <div class="item-mid">ファイル数</div>
-      <div class="input-mid-2-l" align="right"><%= @download_file_total %><br></div>
-      <div class="input-mid-2-r">ファイル</div>
+  <div class="widget stacked widget-table action-table">
+    <div class="widget-header">
+      <i class="icon-th-list"></i><h3>送信</h3>
+    </div><!-- /widget-header -->
 
-      <div class="item-mid">ファイルサイズ</div>
-      <div class="input-mid-2-l" align="right"><%= @download_file_size %><br></div>
-      <div class="input-mid-2-r">ＭＢ</div>
-  </div>
+    <div class="widget-content">
+    <table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+        <th>利用者数</th>
+        <th>ファイル数</th>
+        <th>ファイルサイズ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @send_matter %>人</td>
+        <td><%= @file_total %>ファイル</td>
+        <td><%= @file_size %>MB</td>
+      </tr>
+    </tbody>
+    </table>
+    </div> <!-- /widget-content -->
+  </div> <!-- /widget -->
   </fieldset>
+  </br></br>
 
   <fieldset>
-  <h3>依頼</h3>
-  <div class="table-sys-a">
-      <div class="item-mid">利用件数</div>
-      <div class="input-mid-2-l" align="right"><%= @request_matter %><br></div>
-      <div class="input-mid-2-r">件</div>
-  </div>
-  </fieldset>
+  <div class="widget stacked widget-table action-table">
+    <div class="widget-header">
+      <i class="icon-th-list"></i><h3>受信</h3>
+    </div><!-- /widget-header -->
 
-<br>
+    <div class="widget-content">
+    <table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+        <th>ファイル数</th>
+        <th>ファイルサイズ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @download_file_total %>ファイル</td>
+        <td><%= @download_file_size %>MB</td>
+      </tr>
+    </tbody>
+    </table>
+    </div> <!-- /widget-content -->
+  </div> <!-- /widget -->
+  </fieldset>
+  </br></br>
+
+  <fieldset>
+  <div class="widget stacked widget-table action-table">
+    <div class="widget-header">
+      <i class="icon-th-list"></i><h3>依頼</h3>
+    </div><!-- /widget-header -->
+
+    <div class="widget-content">
+    <table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+        <th>利用件数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td align="center"><%= @request_matter %>件</td>
+      </tr>
+    </tbody>
+    </table>
+    </div> <!-- /widget-content -->
+  </div> <!-- /widget -->
+  </fieldset>

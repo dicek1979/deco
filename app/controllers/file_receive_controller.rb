@@ -29,8 +29,8 @@ class FileReceiveController < ApplicationController
     @send_matter = @receiver.send_matter
     session[:receiver_id] = params['id']
     unless flash[:notice]
-      flash.now[:notice] = "#{ @receiver.name }様，#{ @send_matter.name }さんから
-                          ファイルを預かっています。"
+      flash.now[:notice] = "#{ @receiver.name }様，#{ @send_matter.name }様より
+                          ファイルをお預かりしています。"
     end
   end
 
@@ -61,8 +61,8 @@ class FileReceiveController < ApplicationController
         else
           @receiver = Receiver.find(session[:auth]['receiver_id'])
           @attachments = @send_matter.attachments
-          flash[:notice] = "#{ @receiver.name }様，#{ @send_matter.name }さんから
-                              ファイルを預かっています。"
+          flash[:notice] = "#{ @receiver.name }様，#{ @send_matter.name }様より
+                              ファイルをお預かりしています。"
         end
       elsif @send_matter.moderate_flag == nil
         if (Time.now - (Time.parse(@send_matter.created_at.to_s) +
@@ -72,8 +72,8 @@ class FileReceiveController < ApplicationController
         else
           @receiver = Receiver.find(session[:auth]['receiver_id'])
           @attachments = @send_matter.attachments
-          flash[:notice] = "#{ @receiver.name }様，#{ @send_matter.name }さんから
-                              ファイルを預かっています。"
+          flash[:notice] = "#{ @receiver.name }様，#{ @send_matter.name }様より
+                              ファイルをお預かりしています。"
         end
       else
         flash[:notice] = "不正なアクセスです。
